@@ -1,0 +1,39 @@
+.search {
+  margin: 20px 0;
+  position: relative;
+}
+.list-group {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.form-control {
+  border: 0;
+  font-weight: 700;
+  height: 50px;
+  color: rgba(#fff, 1);
+  background: rgba(#fff, 0.1);
+  box-shadow: none;
+
+  &:focus {
+    background: rgba(#fff, 0.2);
+    color: #fff;
+    box-shadow: none;
+  }
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgba(#fff, 1);
+    opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: rgba(#fff, 1);
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: rgba(#fff, 1);
+  }
+}

@@ -1,0 +1,48 @@
+.currently {
+  flex-grow: 1;
+}
+.stats {
+  float: right;
+  font-size: 18px;
+  li {
+    margin-bottom: 40px;
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  h5 {
+    margin: 5px 0 0 0;
+    padding: 0;
+    font-weight: 700;
+    font-size: 26px;
+  }
+  svg {
+    fill: #fff;
+    height: 40px;
+    width: 40px;
+    margin-right: 20px;
+  }
+  img {
+    height: 40px;
+    max-width: 100%;
+  }
+}
+.now {
+  img {
+    height: 150px;
+  }
+}
+
+.summary {
+  font-size: 36px;
+}
+
+.location {
+  font-size: 22px;
+}
+
+.temp {
+  font-size: 58px;
+  font-weight: 700;
+  margin: 10px 0 0 0;
+}

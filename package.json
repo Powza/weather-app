@@ -1,0 +1,36 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "description": "Interactive weather app",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "dev": "node server.js",
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
+  },
+  "dependencies": {
+    "@zeit/next-css": "^1.0.1",
+    "@zeit/next-sass": "^1.0.1",
+    "create-server": "^1.0.2",
+    "dotenv": "^8.0.0",
+    "easy-peasy": "^3.0.1",
+    "express": "^4.17.1",
+    "iplocation": "^6.1.0",
+    "moment": "^2.24.0",
+    "next": "^9.0.3",
+    "node-fetch": "^2.6.0",
+    "node-sass": "^4.12.0",
+    "public-ip": "^3.2.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-id-swiper": "^2.3.2",
+    "react-micro-modal": "^1.6.0",
+    "react-places-autocomplete": "^7.2.1",
+    "react-tabs": "^3.0.0",
+    "swiper": "^4.5.0"
+  },
+  "devDependencies": {
+    "next-compose": "0.0.2"
+  }
+}
