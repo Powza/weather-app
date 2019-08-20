@@ -52,7 +52,7 @@ const header = props => {
     <header className={styles["header"]}>
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-3 mx-auto">
+          <div className="col-sm-12 col-md-6 col-lg-4 mx-auto">
             <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
           </div>
         </div>

@@ -16,6 +16,7 @@ const search = props => {
       onChange={props.changed}
       onSelect={props.selected}
       searchOptions={searchOptions}
+      googleCallbackName="myCallbackFunc"
     >
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
         const { onChange } = getInputProps({

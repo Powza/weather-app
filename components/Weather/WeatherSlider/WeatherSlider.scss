@@ -19,6 +19,11 @@
   padding: 8px 5px;
   border-radius: 4px;
   transition: 0.2s;
+  @media (max-width: 767px) {
+    img {
+      height: 40px;
+    }
+  }
 }
 .slide-modal-btn {
   cursor: pointer;
@@ -31,17 +36,36 @@
 .date {
   font-size: 18px;
   margin-bottom: 10px;
+  @media (max-width: 767px) {
+    font-size: 16px;
+  }
 }
 
 .temp {
   font-weight: 700;
   font-size: 24px;
+  @media (max-width: 767px) {
+    font-size: 20px;
+  }
+}
+
+.icon {
+  @media (max-width: 767px) {
+    height: 40px;
+  }
 }
 
 .modal {
   color: #000;
-  max-width: 600px;
-  width: 100%;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  :global(.modal-container) {
+    @media (max-width: 767px) {
+      height: 100%;
+    }
+  }
   &__top {
     background: #333;
     color: #fff;
