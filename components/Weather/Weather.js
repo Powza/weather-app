@@ -21,6 +21,7 @@ const weather = props => {
           state={state}
           daily={weather ? weather.daily : ""}
           currently={weather ? weather.currently : ""}
+          alerts={weather ? weather.alerts : ""}
         />
 
         {weather && (

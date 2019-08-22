@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Header.scss";
 import { geocodeByAddress } from "react-places-autocomplete";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import Search from "../Search/Search";
 import { fetchWeather } from "../../api/APIUtils";
 
@@ -10,6 +10,7 @@ const header = props => {
     address: ""
   });
 
+  const weather = useStoreState(state => state.weather.weatherData);
   const setWeather = useStoreActions(actions => actions.weather.setWeatherData);
   const setLatitude = useStoreActions(actions => actions.location.setLocationLatitude);
   const setLongitude = useStoreActions(actions => actions.location.setLocationLongitude);

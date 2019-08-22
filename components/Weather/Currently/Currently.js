@@ -2,6 +2,7 @@ import styles from "../Currently/Currently.scss";
 import WeatherIcon from "../../WeatherIcon/WeatherIcon";
 import Units from "../Units/Units";
 import formatAsPercentage from "../../../utils/formateAsPercentage";
+import Alerts from "../Alerts/Alerts";
 
 const currently = props => {
   return (
@@ -11,6 +12,7 @@ const currently = props => {
           <div className="col-6">
             <div className={styles.now}>
               <WeatherIcon condition={props.currently.icon} />
+              <div className={styles["alerts-box"]}>{props.alerts && <Alerts alert={props.alerts} />}</div>
               <div className={styles.summary}>{props.currently.summary}</div>
               <div className={styles.location}>
                 {props.city ? props.city + "," : ""} {props.state}

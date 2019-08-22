@@ -1,0 +1,36 @@
+.alert-link {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+  text-decoration: none;
+  transition: 0.2s;
+  margin-right: 5px;
+  text-align: center;
+  font-weight: 700;
+  &:hover {
+    color: #fff;
+    opacity: 0.7;
+    text-decoration: none;
+  }
+  &:global(.warning) {
+    background: rgba(red, 0.5);
+  }
+  &:global(.advisory) {
+    background: rgba(orange, 0.5);
+  }
+  &:global(.watch) {
+    background: rgba(teal, 0.5);
+  }
+}
+
+.alert-modal {
+  color: #000;
+  :global(.modal-container) {
+    border-radius: 0 !important;
+    @media (max-width: 767px) {
+      height: 100%;
+    }
+  }
+}
