@@ -38,3 +38,17 @@ body {
     height: 100px;
   }
 }
+
+:global(.modal) {
+  color: #000;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  :global(.modal-container) {
+    border-radius: 0 !important;
+    @media (max-width: 767px) {
+      height: 100%;
+    }
+  }
+}

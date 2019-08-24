@@ -37,6 +37,7 @@ const index = () => {
 
   useEffect(() => {
     if (isMount) {
+      window.myCallbackFunc = function() {};
       getPosition()
         .then(results => {
           const lat = results.coords.latitude;

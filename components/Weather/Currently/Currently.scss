@@ -1,8 +1,11 @@
 .currently {
   flex-grow: 1;
 }
-.stats {
+.pullRight {
   float: right;
+}
+.stats {
+  //float: right;
   font-size: 18px;
   @media (max-width: 767px) {
     font-size: 16px;
@@ -25,6 +28,12 @@
       font-size: 20px;
     }
   }
+  img {
+    height: 40px;
+    max-width: 100%;
+  }
+}
+.stats-icon {
   svg {
     fill: #fff;
     height: 40px;
@@ -35,9 +44,18 @@
       width: 30px;
     }
   }
-  img {
-    height: 40px;
-    max-width: 100%;
+}
+.stats-more {
+  background: rgba(#fff, 0.1);
+  cursor: pointer;
+  border: 0;
+  @media (max-width: 767px) {
+    &:global(.list-group-item) {
+      padding: 0.25rem 0.75rem;
+    }
+  }
+  &:hover {
+    background: rgba(#fff, 0.3);
   }
 }
 .now {
@@ -70,4 +88,73 @@
   @media (max-width: 767px) {
     font-size: 40px;
   }
+}
+
+.modal {
+  &__top {
+    background: #333;
+    color: #fff;
+    padding: 20px;
+    text-shadow: 0 1px 2px rgba(#000, 0.2);
+    font-weight: 700;
+    position: relative;
+    &__close {
+      position: absolute;
+      z-index: 1;
+      top: 15px;
+      right: 20px;
+      font-size: 22px;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      height: 30px;
+      width: 30px;
+      line-height: 0;
+      border-radius: 25px;
+      background: rgba(#000, 0.3);
+      color: #fff;
+    }
+    h2 {
+      position: relative;
+      font-size: 18px;
+      margin: 0;
+      padding: 0;
+      font-weight: 700;
+    }
+  }
+  &__item {
+    padding: 10px 0;
+    text-align: center;
+    &__title {
+      font-size: 16px;
+    }
+    svg {
+      fill: #fff;
+      height: 40px;
+      width: 40px;
+      margin-bottom: 5px;
+      filter: drop-shadow(1px 1px 3px rgba(#000, 0.3));
+    }
+  }
+  ul {
+    list-style: none;
+    margin: 0 0 20px 0;
+    padding: 0;
+    li {
+      display: block;
+      padding: 5px 0;
+      border-bottom: 1px dashed rgba(#000, 0.2);
+      &:after {
+        content: "";
+        display: block;
+        clear: both;
+      }
+      span {
+        float: right;
+      }
+    }
+  }
+}
+.modal-body {
+  padding: 20px;
 }

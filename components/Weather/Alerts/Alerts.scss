@@ -25,13 +25,3 @@
     background: rgba(teal, 0.5);
   }
 }
-
-.alert-modal {
-  color: #000;
-  :global(.modal-container) {
-    border-radius: 0 !important;
-    @media (max-width: 767px) {
-      height: 100%;
-    }
-  }
-}
