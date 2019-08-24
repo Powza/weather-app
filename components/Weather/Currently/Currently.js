@@ -149,7 +149,10 @@ const currently = props => {
                                   </li>
                                   <li>
                                     <strong>Nearest Storm Direction</strong>{" "}
-                                    <span>{getDirection(props.currently.nearestStormBearing)}</span>
+                                    <span>
+                                      {getDirection(props.currently.nearestStormBearing)} (
+                                      {props.currently.nearestStormBearing} °)
+                                    </span>
                                   </li>
                                 </>
                               ) : (
