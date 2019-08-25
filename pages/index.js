@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import Layout from "../components/Layout";
 import Header from "../components/Header/Header";
+import Footer from "../components/Footer/Footer";
 import { useIsMount } from "../components/Hooks/useIsMount";
 import { useStoreActions } from "easy-peasy";
 import { convertRegion } from "../utils/stateNameAbbreviation";
@@ -81,6 +82,7 @@ const index = () => {
     <Layout title="Weather App">
       <Header />
       <Weather />
+      <Footer />
     </Layout>
   );
 };
