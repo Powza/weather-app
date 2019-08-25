@@ -1,8 +1,8 @@
 import { useEffect } from "react";
+import { useIsMount } from "../components/Hooks/useIsMount";
 import Layout from "../components/Layout";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
-import { useIsMount } from "../components/Hooks/useIsMount";
 import { useStoreActions } from "easy-peasy";
 import { convertRegion } from "../utils/stateNameAbbreviation";
 import Weather from "../components/Weather/Weather";
@@ -38,7 +38,6 @@ const index = () => {
 
   useEffect(() => {
     if (isMount) {
-      window.myCallbackFunc = function() {};
       getPosition()
         .then(results => {
           const lat = results.coords.latitude;

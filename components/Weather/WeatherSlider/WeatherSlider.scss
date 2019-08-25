@@ -10,13 +10,16 @@
     &:hover {
       background: rgba(#fff, 0.3);
     }
+    @media (max-width: 767px) {
+      display: none;
+    }
   }
   :global(.swiper-button-disabled) {
     display: none;
   }
 }
 .slide {
-  padding: 8px 5px;
+  padding: 8px 0;
   border-radius: 4px;
   transition: 0.2s;
   @media (max-width: 767px) {

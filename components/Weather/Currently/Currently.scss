@@ -4,6 +4,9 @@
 .pullRight {
   float: right;
 }
+.alerts-box {
+  margin-bottom: 20px;
+}
 .stats {
   //float: right;
   font-size: 18px;
@@ -40,8 +43,8 @@
     width: 40px;
     margin-right: 20px;
     @media (max-width: 767px) {
-      height: 30px;
-      width: 30px;
+      height: 25px;
+      width: 25px;
     }
   }
 }
@@ -70,7 +73,7 @@
 .summary {
   font-size: 36px;
   @media (max-width: 767px) {
-    font-size: 26px;
+    font-size: 20px;
   }
 }
 

@@ -8,7 +8,7 @@ const footer = props => {
         <br />
         View Source on{" "}
         <a href="https://github.com/Powza/weather-app">
-          <i class="fab fa-github"></i> GitHub
+          <i className="fab fa-github" /> GitHub
         </a>{" "}
         - Weather Data by <a href="https://darksky.net/dev">Dark Sky</a>
       </div>

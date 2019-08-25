@@ -12,7 +12,17 @@ class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-          <link rel="shortcut icon" type="image/x-icon" href="/static/favicon.ico" />
+          <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png" />
+          <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png" />
+          <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png" />
+          <link rel="manifest" href="/static/favicon/site.webmanifest" />
+          <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+          <link rel="shortcut icon" href="/static/favicon/favicon.ico" />
+          <meta name="apple-mobile-web-app-title" content="Tiny Minute Weather" />
+          <meta name="application-name" content="Tiny Minute Weather" />
+          <meta name="msapplication-TileColor" content="#ffffff" />
+          <meta name="msapplication-config" content="/static/favicon/browserconfig.xml" />
+          <meta name="theme-color" content="#ffffff"></meta>
           <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" />
           <link
             rel="stylesheet"
@@ -21,13 +31,13 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css" />
-          <script
+          {/* <script
             async
             defer
             src={`https://maps.googleapis.com/maps/api/js?key=${
               process.env.GOOGLE_MAPS_API_PLACES_KEY
-            }&libraries=places`}
-          />
+            }&libraries=places&callback=myCallbackFunc`}
+          /> */}
         </Head>
         <body>
           <Main />

@@ -40,8 +40,7 @@ const weatherSlider = props => {
               <WeatherIcon condition={item.icon} />
               <div className={styles.temp}>{Math.round(item.temperatureHigh)} °</div>
               <span>
-                <i className="fas fa-arrow-down" /> {Math.round(item.temperatureLow)} ° /{" "}
-                <i className="fas fa-arrow-up" /> {Math.round(item.temperatureHigh)} °
+                <i className="fas fa-arrow-down" /> {Math.round(item.temperatureLow)} °
               </span>
             </div>
             <>
@@ -78,7 +77,7 @@ const weatherSlider = props => {
                               <path d="M3.563 83.951c.157 0 .313-.01.474-.031l39.029-5.181a3.567 3.567 0 0 0 2.977-4.45l-10.05-37.8c-.505-1.905-2.459-3.023-4.363-2.532a3.57 3.57 0 0 0-2.532 4.363l9.009 33.882L3.096 76.85a3.564 3.564 0 0 0-3.064 4.004 3.565 3.565 0 0 0 3.531 3.097zM125.922 116.941l35.011-4.649a3.564 3.564 0 0 0 3.064-4.004 3.563 3.563 0 0 0-4.004-3.064l-39.029 5.181a3.567 3.567 0 0 0-2.977 4.45l10.05 37.796a3.565 3.565 0 0 0 4.363 2.532 3.57 3.57 0 0 0 2.532-4.363l-9.01-33.879z" />
                               <path d="M184.952 126.618l-39.029 5.181a3.567 3.567 0 0 0-2.977 4.45l10.05 37.796a3.565 3.565 0 0 0 4.363 2.532 3.57 3.57 0 0 0 2.532-4.363l-9.009-33.879 35.011-4.649a3.564 3.564 0 0 0 3.064-4.004c-.258-1.952-2.051-3.314-4.005-3.064z" />
                             </svg>
-                            <h4 className={styles["modal__item__title"]}>Pressure</h4>
+                            <h4 className={styles["modal__item__title"]}>Air Pressure</h4>
                             {Math.round(item.pressure)} mb
                           </div>
                         </div>
@@ -203,7 +202,7 @@ const weatherSlider = props => {
     const params = {
       loop: false,
       slidesPerView: 7,
-      spaceBetween: 15,
+      spaceBetween: 5,
       rebuildOnUpdate: true,
       navigation: {
         nextEl: ".swiper-button-next",
@@ -240,7 +239,7 @@ const weatherSlider = props => {
     const params = {
       loop: false,
       slidesPerView: 8,
-      spaceBetween: 15,
+      spaceBetween: 5,
       rebuildOnUpdate: true,
       navigation: {
         nextEl: ".swiper-button-next",
