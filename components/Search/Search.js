@@ -1,13 +1,14 @@
 import { useStoreState } from "easy-peasy";
 import PlacesAutocomplete from "react-places-autocomplete";
 import styles from "./Search.scss";
-
 import { useEffect } from "react";
 import { useIsMount } from "../Hooks/useIsMount";
 
 const search = props => {
+  const coords = useStoreState(state => state.location.locationLatitude);
   const city = useStoreState(state => state.location.locationCity);
   const state = useStoreState(state => state.location.locationState);
+  const weather = useStoreState(state => state.weather.weatherData);
   const isMount = useIsMount();
 
   const searchOptions = {
@@ -21,9 +22,7 @@ const search = props => {
         window.myCallbackFunc = function() {};
       } else {
         const script = document.createElement("script");
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${
-          process.env.GOOGLE_MAPS_API_PLACES_KEY
-        }&libraries=places&callback=myCallbackFunc`;
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_PLACES_KEY}&libraries=places&callback=myCallbackFunc`;
         script.id = "googleapis";
         script.async = true;
         script.defer = true;
@@ -44,12 +43,19 @@ const search = props => {
         const { onChange } = getInputProps({
           placeholder: `${city}, ${state}`
         });
+
         let readyStatus = "Loading";
-        if (city === "") {
-          readyStatus = "Checking Your Position";
-        } else {
+
+        if (coords === "") {
+          readyStatus = "Checking Your Position..";
+        }
+        if (coords !== "" && weather === "") {
+          readyStatus = "Loading Weather Data...";
+        }
+        if (weather !== "") {
           readyStatus = "Search a City";
         }
+
         return (
           <div className={styles.search}>
             <input
@@ -60,8 +66,8 @@ const search = props => {
             />
             <div className={[["list-group"], styles["list-group"]].join(" ")}>
               {loading && (
-                <div>
-                  <i className="fas fa-spinner fa-pulse" /> Loading...
+                <div className="list-group-item disabled" aria-disabled="true">
+                  <i className="fas fa-spinner fa-pulse" /> Loading Results...
                 </div>
               )}
               {suggestions.map(suggestion => {
@@ -74,7 +80,7 @@ const search = props => {
                       className
                     })}
                   >
-                    <span>{suggestion.description}</span>
+                    {suggestion.description}
                   </div>
                 );
               })}

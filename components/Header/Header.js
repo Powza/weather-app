@@ -9,8 +9,7 @@ const header = props => {
   const [search, setSearch] = useState({
     address: ""
   });
-
-  const weather = useStoreState(state => state.weather.weatherData);
+  const setSpinner = useStoreActions(actions => actions.spinner.setSpinner);
   const setWeather = useStoreActions(actions => actions.weather.setWeatherData);
   const setLatitude = useStoreActions(actions => actions.location.setLocationLatitude);
   const setLongitude = useStoreActions(actions => actions.location.setLocationLongitude);
@@ -21,16 +20,17 @@ const header = props => {
     setSearch({ address });
   };
   const handleSearchSelect = address => {
+    setSpinner(true);
     geocodeByAddress(address)
       .then(results => results[0])
       .then(data => {
         const dataAddress = data.address_components;
         const lat = data.geometry.location.lat();
         const lng = data.geometry.location.lng();
-
         setLatitude(lat);
         setLongitude(lng);
         setSearch({ address: "" });
+        setSpinner(false);
         for (var i = 0; i < dataAddress.length; i += 1) {
           var addressObj = dataAddress[i];
           for (var j = 0; j < addressObj.types.length; j += 1) {

@@ -6,6 +6,14 @@
   position: absolute;
   left: 0;
   right: 0;
+  border-top-left-radius: 0;
+  :global(.list-group-item) {
+    cursor: pointer;
+  }
+  :global(.active) {
+    background: #999;
+    border-color: #999;
+  }
 }
 
 .form-control {

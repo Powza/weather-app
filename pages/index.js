@@ -17,6 +17,7 @@ const index = () => {
   const setCity = useStoreActions(actions => actions.location.setLocationCity);
   const setState = useStoreActions(actions => actions.location.setLocationState);
   const isMount = useIsMount();
+  const setSpinner = useStoreActions(actions => actions.spinner.setSpinner);
 
   function getWeatherLocation(lat, lng) {
     fetchLocation(lat, lng).then(results => {
@@ -38,6 +39,7 @@ const index = () => {
 
   useEffect(() => {
     if (isMount) {
+      setSpinner(true);
       getPosition()
         .then(results => {
           const lat = results.coords.latitude;
@@ -46,6 +48,7 @@ const index = () => {
           setLongitude(lng);
           getWeatherLocation(lat, lng);
           console.log("Geolocation Status: Success");
+          setSpinner(false);
         })
         .catch(error => {
           const iplocation = require("iplocation").default;
@@ -67,6 +70,7 @@ const index = () => {
                 setLatitude(lat);
                 setLongitude(lng);
                 getWeatherLocation(lat, lng);
+                setSpinner(false);
               })
               .catch(err => {
                 console.error("IP Location Status:", err.message, "| Must type a city in search bar instead.");

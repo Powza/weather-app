@@ -7,6 +7,7 @@ import WeatherSlider from "../Weather/WeatherSlider/WeatherSlider";
 import { resetIdCounter } from "react-tabs";
 
 const weather = props => {
+  const spinner = useStoreState(state => state.spinner);
   const weather = useStoreState(state => state.weather.weatherData);
   const city = useStoreState(state => state.location.locationCity);
   const state = useStoreState(state => state.location.locationState);
@@ -15,6 +16,7 @@ const weather = props => {
   return (
     <div className={styles.weather}>
       <WeatherBackground condition={weather ? weather.currently.icon : ""} />
+      {spinner.spinner === true && <div className="loading-spinner"></div>}
       <div className={styles["weather-wrap"]}>
         <Currently
           city={city}

@@ -31,13 +31,6 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css" />
-          {/* <script
-            async
-            defer
-            src={`https://maps.googleapis.com/maps/api/js?key=${
-              process.env.GOOGLE_MAPS_API_PLACES_KEY
-            }&libraries=places&callback=myCallbackFunc`}
-          /> */}
         </Head>
         <body>
           <Main />

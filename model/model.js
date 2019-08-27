@@ -28,9 +28,17 @@ const location = {
   })
 };
 
+const spinner = {
+  spinner: false,
+  setSpinner: action((state, spinner) => {
+    state.spinner = spinner;
+  })
+};
+
 const model = {
   weather,
-  location
+  location,
+  spinner
 };
 
 export default model;

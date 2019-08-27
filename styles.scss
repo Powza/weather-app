@@ -39,6 +39,34 @@ body {
   }
 }
 
+:global(.loading-spinner) {
+  font-weight: 700;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  content: "";
+  width: 150px;
+  height: 150px;
+  border: 6px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  -webkit-animation: spin 1s ease-in-out infinite;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes spin {
+  to {
+    -webkit-transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
 :global(.modal) {
   color: #000;
   -webkit-transform: translate3d(0, 0, 0);

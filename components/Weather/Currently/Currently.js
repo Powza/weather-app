@@ -24,8 +24,7 @@ const currently = props => {
             </div>
             {props.daily && (
               <span>
-                <i className="fas fa-arrow-down" /> {Math.round(props.daily.data[0].temperatureLow)} ° /{" "}
-                <i className="fas fa-arrow-up" /> {Math.round(props.daily.data[0].temperatureHigh)} °
+                {Math.round(props.daily.data[0].temperatureLow)} ° / {Math.round(props.daily.data[0].temperatureHigh)} °
               </span>
             )}
           </div>
@@ -112,8 +111,7 @@ const currently = props => {
                         <div className={styles["modal-body"]}>
                           <ul>
                             <li>
-                              <strong>Feels Like</strong>{" "}
-                              <span>{Math.round(props.currently.apparentTemperature)} °</span>
+                              <strong>Feels Like</strong> <span>{Math.round(props.currently.apparentTemperature)} °</span>
                             </li>
                             <li>
                               <strong>Dew Point</strong> <span>{Math.round(props.currently.dewPoint)} °</span>
@@ -139,17 +137,15 @@ const currently = props => {
                             <li>
                               <strong>Visibility</strong> <span>{Math.round(props.currently.visibility)} mi</span>
                             </li>
-                            {props.currently.nearestStormDistance != 0 ? (
+                            {props.currently.nearestStormBearing ? (
                               <>
                                 <li>
-                                  <strong>Nearest Storm Distance</strong>{" "}
-                                  <span>{Math.round(props.currently.nearestStormDistance)} mi</span>
+                                  <strong>Nearest Storm Distance</strong> <span>{Math.round(props.currently.nearestStormDistance)} mi</span>
                                 </li>
                                 <li>
                                   <strong>Nearest Storm Direction</strong>{" "}
                                   <span>
-                                    {getDirection(props.currently.nearestStormBearing)} (
-                                    {props.currently.nearestStormBearing} °)
+                                    {getDirection(props.currently.nearestStormBearing)} ({props.currently.nearestStormBearing} °)
                                   </span>
                                 </li>
                               </>
