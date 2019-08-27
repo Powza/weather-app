@@ -1,6 +1,7 @@
 .search {
-  margin: 15px 0;
   position: relative;
+  flex: 1 1 auto;
+  width: 1%;
 }
 .list-group {
   position: absolute;
@@ -20,10 +21,11 @@
   border: 0;
   font-weight: 700;
   height: 50px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
   color: rgba(#fff, 1);
   background: rgba(#fff, 0.1);
   box-shadow: none;
-
   &:focus {
     background: rgba(#fff, 0.2);
     color: #fff;
