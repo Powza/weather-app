@@ -25,12 +25,12 @@
     "public-ip": "^3.2.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-google-places-autocomplete": "^1.5.2",
     "react-id-swiper": "^2.3.2",
     "react-micro-modal": "^1.6.0",
     "react-places-autocomplete": "^7.2.1",
     "react-tabs": "^3.0.0",
-    "swiper": "^4.5.0"
+    "swiper": "^4.5.0",
+    "typescript": "^3.5.3"
   },
   "devDependencies": {
     "next-compose": "0.0.2"
