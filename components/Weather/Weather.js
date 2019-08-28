@@ -15,15 +15,16 @@ const weather = props => {
 
   return (
     <div className={styles.weather}>
-      <WeatherBackground condition={weather ? weather.currently.icon : ""} />
+      <WeatherBackground condition={weather && weather.currently.icon} />
       {spinner.spinner === true && <div className="loading-spinner"></div>}
       <div className={styles["weather-wrap"]}>
         <Currently
           city={city}
           state={state}
-          daily={weather ? weather.daily : ""}
-          currently={weather ? weather.currently : ""}
-          alerts={weather ? weather.alerts : ""}
+          daily={weather && weather.daily}
+          currently={weather && weather.currently}
+          alerts={weather && weather.alerts}
+          flags={weather && weather.flags}
         />
 
         {weather && (
@@ -34,10 +35,10 @@ const weather = props => {
             </TabList>
 
             <TabPanel>
-              <WeatherSlider day={weather ? weather.daily.data : ""} />
+              <WeatherSlider day={weather && weather.daily.data} />
             </TabPanel>
             <TabPanel>
-              <WeatherSlider hour={weather ? weather.hourly.data : ""} />
+              <WeatherSlider hour={weather && weather.hourly.data} />
             </TabPanel>
           </Tabs>
         )}

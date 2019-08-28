@@ -1,8 +1,8 @@
+import { useEffect } from "react";
+import { useIsMount } from "../Hooks/useIsMount";
 import { useStoreState } from "easy-peasy";
 import PlacesAutocomplete from "react-places-autocomplete";
 import styles from "./Search.scss";
-import { useEffect } from "react";
-import { useIsMount } from "../Hooks/useIsMount";
 
 const search = props => {
   const coords = useStoreState(state => state.location.locationLatitude);

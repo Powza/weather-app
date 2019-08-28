@@ -51,7 +51,7 @@ const weatherSlider = props => {
               )}
               <WeatherIcon condition={item.icon} />
               <div className={styles.temp}>
-                <span>{Math.round(item.temperatureLow)}°</span> {Math.round(item.temperatureHigh)} °
+                <span>{Math.round(item.temperatureLow)} °</span> {Math.round(item.temperatureHigh)} °
               </div>
               <span>{getCondition(item.icon)}</span>
             </div>
@@ -219,7 +219,6 @@ const weatherSlider = props => {
       slidesPerView: 7,
       spaceBetween: 5,
       shouldSwiperUpdate: true,
-      //rebuildOnUpdate: true,
       breakpoints: {
         1024: {
           slidesPerView: 4

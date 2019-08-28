@@ -1,16 +1,12 @@
-import { useStoreState } from "easy-peasy";
-
 const units = props => {
-  const weather = useStoreState(state => state.weather.weatherData);
   let checkUnits = null;
-
-  if (weather && weather.flags.units === "us") {
+  if (props.flags.units === "us") {
     checkUnits = "°F";
-  } else if (weather && weather.flags.units === "si") {
+  } else if (props.flags.units === "si") {
     checkUnits = "°C";
   }
 
-  return <React.Fragment>{checkUnits}</React.Fragment>;
+  return checkUnits;
 };
 
 export default units;

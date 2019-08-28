@@ -7,6 +7,7 @@ import { useStoreActions } from "easy-peasy";
 import { convertRegion } from "../utils/stateNameAbbreviation";
 import Weather from "../components/Weather/Weather";
 import { getPosition, fetchLocation, fetchWeather } from "../api/APIUtils";
+import iplocation from "iplocation";
 
 import styles from "../styles.scss";
 
@@ -51,7 +52,6 @@ const index = () => {
           setSpinner(false);
         })
         .catch(error => {
-          const iplocation = require("iplocation").default;
           const publicIp = require("public-ip");
           const providerList = require("../api/iplocation_providers.json");
           const filterData = providerList

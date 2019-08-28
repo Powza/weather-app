@@ -5,6 +5,7 @@ import { useStoreActions } from "easy-peasy";
 import Search from "../Search/Search";
 import { convertRegion } from "../../utils/stateNameAbbreviation";
 import { getPosition, fetchLocation, fetchWeather } from "../../api/APIUtils";
+import iplocation from "iplocation";
 
 const header = props => {
   const [search, setSearch] = useState({
@@ -98,7 +99,6 @@ const header = props => {
         setSpinner(false);
       })
       .catch(error => {
-        const iplocation = require("iplocation").default;
         const publicIp = require("public-ip");
         const providerList = require("../../api/iplocation_providers.json");
         const filterData = providerList
@@ -133,10 +133,6 @@ const header = props => {
         <div className="row">
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 mx-auto">
             <div className={styles.mid}>
-              {/* <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
-              <button className={styles["btn-location"]} onClick={useLocation}>
-                Refresh
-              </button> */}
               <div className="input-group">
                 <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
                 <div className="input-group-append">

@@ -1,5 +1,4 @@
-import { createStore, action, thunk } from "easy-peasy";
-import { convertRegion } from "../utils/stateNameAbbreviation";
+import { createStore, action } from "easy-peasy";
 
 const weather = {
   weatherData: "",
