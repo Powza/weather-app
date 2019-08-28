@@ -75,8 +75,14 @@ body {
   transform: translate3d(0, 0, 0);
   :global(.modal-container) {
     border-radius: 0 !important;
+    padding: 0 !important;
+    max-width: 600px !important;
+    width: 100%;
+    position: relative;
+    overflow: visible;
     @media (max-width: 767px) {
       height: 100%;
+      max-width: 100% !important;
     }
   }
 }

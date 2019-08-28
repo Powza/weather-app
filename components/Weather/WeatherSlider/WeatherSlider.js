@@ -32,7 +32,7 @@ const weatherSlider = props => {
       sliderInitialize = props.day.map((item, index) => {
         const [openModal, setModalOpen] = useState(false);
         const backgroundCondition = {
-          backgroundImage: `url(/static/weather-condition/${item.icon}.jpg)`,
+          backgroundImage: `url(/static/weatherBackgrounds/${item.icon}.jpg)`,
           backgroundSize: "cover",
           backgroundPosition: "center"
         };
@@ -61,7 +61,6 @@ const weatherSlider = props => {
                 modalClassName={styles.modal}
                 handleClose={() => setModalOpen(false)}
                 closeOnAnimationEnd={true}
-                containerStyles={{ padding: "0", borderRadius: "0", maxWidth: "600px", width: "100%" }}
                 disableFirstElementFocus={true}
                 children={handleClose => (
                   <div>

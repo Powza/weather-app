@@ -10,26 +10,29 @@ const alerts = props => {
       return (
         <span key={index}>
           <MicroModal
-            modalClassName={styles["alert-modal"]}
+            modalClassName={styles["modal"]}
             disableFirstElementFocus={true}
             closeOnAnimationEnd={true}
             trigger={handleOpen => (
-              <a
-                onClick={handleOpen}
-                target="_blank"
-                className={[[`${item.severity}`], styles["alert-link"]].join(" ")}
-              >
+              <a onClick={handleOpen} target="_blank" className={[[`${item.severity}`], styles["alert-link"]].join(" ")}>
                 <i className="fas fa-exclamation-triangle" /> {item.title}
               </a>
             )}
             children={handleClose => (
               <>
-                <h3>{item.title}</h3>
-                <p>Expires: {moment.unix(item.expires).format("MMMM Do YYYY, h:mm:ss a")}</p>
-                <p>{item.description}</p>
-                <button onClick={handleClose} className="btn btn-secondary">
-                  Close
-                </button>
+                <div className={[[`${item.severity}`], styles["modal__top"]].join(" ")}>
+                  <button className={styles["modal__top__close"]} onClick={handleClose}>
+                    ×
+                  </button>
+                  <h2>{item.title}</h2>
+                </div>
+                <div className={styles["modal-body"]}>
+                  <p>Expires: {moment.unix(item.expires).format("MMMM Do YYYY, h:mm:ss a")}</p>
+                  <p>{item.description}</p>
+                  <button onClick={handleClose} className="btn btn-secondary">
+                    Close
+                  </button>
+                </div>
               </>
             )}
           />

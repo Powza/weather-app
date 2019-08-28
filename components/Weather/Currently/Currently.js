@@ -87,21 +87,13 @@ const currently = props => {
                     modalClassName={styles.modal}
                     disableFirstElementFocus={true}
                     closeOnAnimationEnd={true}
-                    containerStyles={{
-                      padding: "0",
-                      borderRadius: "0",
-                      maxWidth: "600px",
-                      width: "100%",
-                      position: "relative",
-                      overflow: "visible"
-                    }}
                     trigger={handleOpen => (
                       <a onClick={handleOpen} target="_blank" className={[["btn"], styles["stats-more"]].join(" ")}>
                         More Details <i className="fas fa-long-arrow-alt-right" />
                       </a>
                     )}
                     children={handleClose => (
-                      <div>
+                      <>
                         <div className={styles["modal__top"]}>
                           <button className={styles["modal__top__close"]} onClick={handleClose}>
                             ×
@@ -157,7 +149,7 @@ const currently = props => {
                             Close
                           </button>
                         </div>
-                      </div>
+                      </>
                     )}
                   />
                 </li>
