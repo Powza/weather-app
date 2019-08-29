@@ -3,7 +3,7 @@ Built with React, Next.js, DarkSky, Easy peasy
 
 ```npm install weather-app```
 
-## Must create a .env file in root with youR API keys
+## Must create a .env file in root with your API keys
 
 ```
 # Google Maps
