@@ -14,36 +14,38 @@ const weather = props => {
   resetIdCounter();
 
   return (
-    <div className={styles.weather}>
-      <WeatherBackground condition={weather && weather.currently.icon} />
-      {spinner.spinner === true && <div className="loading-spinner"></div>}
-      <div className={styles["weather-wrap"]}>
-        <Currently
-          city={city}
-          state={state}
-          daily={weather && weather.daily}
-          currently={weather && weather.currently}
-          alerts={weather && weather.alerts}
-          flags={weather && weather.flags}
-        />
+    <>
+      <div className={styles.weather}>
+        <WeatherBackground condition={weather && weather.currently.icon} />
+        {spinner.spinner === true && <div className="loading-spinner"></div>}
+        <div className={styles["weather-wrap"]}>
+          <Currently
+            city={city}
+            state={state}
+            daily={weather && weather.daily}
+            currently={weather && weather.currently}
+            alerts={weather && weather.alerts}
+            flags={weather && weather.flags}
+          />
 
-        {weather && (
-          <Tabs className={styles.tabs} selectedTabClassName={styles.selected}>
-            <TabList className="list-group list-group-horizontal">
-              <Tab className="list-group-item">Daily</Tab>
-              <Tab className="list-group-item">Hourly</Tab>
-            </TabList>
+          {weather && (
+            <Tabs className={styles.tabs} selectedTabClassName={styles.selected}>
+              <TabList className="list-group list-group-horizontal">
+                <Tab className="list-group-item">Daily</Tab>
+                <Tab className="list-group-item">Hourly</Tab>
+              </TabList>
 
-            <TabPanel>
-              <WeatherSlider day={weather && weather.daily.data} />
-            </TabPanel>
-            <TabPanel>
-              <WeatherSlider hour={weather && weather.hourly.data} />
-            </TabPanel>
-          </Tabs>
-        )}
+              <TabPanel>
+                <WeatherSlider day={weather && weather.daily.data} />
+              </TabPanel>
+              <TabPanel>
+                <WeatherSlider hour={weather && weather.hourly.data} />
+              </TabPanel>
+            </Tabs>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,9 +1,9 @@
 export function getCondition(condition) {
   switch (condition) {
     case "clear-day":
-      return "Clear Day";
+      return "Clear";
     case "clear-night":
-      return "Clear Night";
+      return "Clear";
     case "rain":
       return "Rain";
     case "snow":

@@ -39,8 +39,8 @@ const index = () => {
   }
 
   useEffect(() => {
+    setSpinner(true);
     if (isMount) {
-      setSpinner(true);
       getPosition()
         .then(results => {
           const lat = results.coords.latitude;
