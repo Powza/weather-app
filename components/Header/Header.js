@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./Header.scss";
 import { geocodeByAddress } from "react-places-autocomplete";
-import { useStoreActions } from "easy-peasy";
+import { useStoreActions, useStoreState } from "easy-peasy";
 import Search from "../Search/Search";
 import { convertRegion } from "../../utils/stateNameAbbreviation";
 import { getPosition, fetchLocation, fetchWeather } from "../../api/APIUtils";
@@ -11,12 +11,17 @@ const header = props => {
   const [search, setSearch] = useState({
     address: ""
   });
+  const [isOpen, setIsOpen] = useState(false);
+
   const setSpinner = useStoreActions(actions => actions.spinner.setSpinner);
   const setWeather = useStoreActions(actions => actions.weather.setWeatherData);
   const setLatitude = useStoreActions(actions => actions.location.setLocationLatitude);
   const setLongitude = useStoreActions(actions => actions.location.setLocationLongitude);
   const setCity = useStoreActions(actions => actions.location.setLocationCity);
   const setState = useStoreActions(actions => actions.location.setLocationState);
+
+  const latitude = useStoreState(state => state.location.locationLatitude);
+  const longitude = useStoreState(state => state.location.locationLongitude);
 
   const handleSearchChange = address => {
     setSearch({ address });
@@ -37,11 +42,9 @@ const header = props => {
           var addressObj = dataAddress[i];
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === "locality") {
-              //console.log(addressObj.long_name);
               setCity(addressObj.long_name);
             }
             if (addressObj.types[j] === "administrative_area_level_1") {
-              //console.log(addressObj.short_name);
               setState(addressObj.short_name);
             }
           }
@@ -52,8 +55,20 @@ const header = props => {
       .catch(error => console.error(error));
   };
 
+  const toggleOpen = () => setIsOpen(!isOpen);
+
+  const refreshLocation = () => {
+    setSpinner(true);
+    setIsOpen(!isOpen);
+    fetchWeather(latitude, longitude).then(results => {
+      setWeather(results);
+      setSpinner(false);
+    });
+  };
+
   const useLocation = () => {
     setSpinner(true);
+    setIsOpen(!isOpen);
     function getWeatherLocation(lat, lng) {
       fetchLocation(lat, lng).then(results => {
         const json = results.features[0].properties.address;
@@ -114,6 +129,8 @@ const header = props => {
       });
   };
 
+  const menuClass = `dropdown-menu dropdown-menu-right${isOpen ? " show" : ""} ${styles["dropdown-custom"]}`;
+
   return (
     <header className={styles["header"]}>
       <div className="container-fluid">
@@ -123,9 +140,24 @@ const header = props => {
               <div className="input-group">
                 <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
                 <div className="input-group-append">
-                  <button className={[["btn"], styles["btn-location"]].join(" ")} type="button" onClick={useLocation}>
-                    <i className="fas fa-location-arrow"></i>
+                  <button
+                    className={[["btn"], styles["btn-more"]].join(" ")}
+                    type="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    onClick={toggleOpen}
+                  >
+                    <i className="fas fa-ellipsis-v"></i>
                   </button>
+                  <div className={menuClass} aria-labelledby="dropdownMenuButton">
+                    <a className="dropdown-item" href="#" onClick={refreshLocation}>
+                      Refresh Weather
+                    </a>
+                    <a className="dropdown-item" href="#" onClick={useLocation}>
+                      Use My Location
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>

@@ -14,9 +14,9 @@
   }
 }
 
-.btn-location {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+.btn-more {
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
   border: 0;
   padding: 0;
   margin: 0;
@@ -24,7 +24,7 @@
   color: #fff;
   font-weight: 700;
   height: 50px;
-  width: 50px;
+  width: 40px;
   color: rgba(#fff, 1);
   background: rgba(#fff, 0.1);
   outline: none;
@@ -32,4 +32,8 @@
     color: #fff;
     background: rgba(#fff, 0.3);
   }
+}
+
+.dropdown-custom {
+  margin-top: 0;
 }
