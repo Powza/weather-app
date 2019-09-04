@@ -1,4 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from "next/document";
+import { GA_TRACKING_ID, GtagNoscript } from "../lib/gtag";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -31,11 +32,23 @@ class MyDocument extends Document {
             crossOrigin="anonymous"
           />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css" />
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_TRACKING_ID}');
+          `
+            }}
+          />
         </Head>
         <body>
           <Main />
           <NextScript />
           <script src={`https://kit.fontawesome.com/${process.env.FONT_AWESOME_KIT_ID}.js`} />
+          <GtagNoscript />
         </body>
       </Html>
     );

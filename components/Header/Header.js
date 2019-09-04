@@ -22,23 +22,6 @@ const header = props => {
     setSearch({ address });
   };
   const handleSearchSelect = address => {
-    function getWeatherLocation(lat, lng) {
-      fetchLocation(lat, lng).then(results => {
-        const json = results.features[0].properties.address;
-        let stateAbbr = convertRegion(json.state);
-        setState(stateAbbr);
-        if (json.locality) {
-          setCity(json.locality);
-        } else if (json.town) {
-          setCity(json.town);
-        } else if (json.city) {
-          setCity(json.city);
-        } else if (json.county) {
-          setCity(json.county);
-        }
-      });
-      fetchWeather(lat, lng).then(results => setWeather(results));
-    }
     setSpinner(true);
     geocodeByAddress(address)
       .then(results => results[0])
@@ -74,8 +57,12 @@ const header = props => {
     function getWeatherLocation(lat, lng) {
       fetchLocation(lat, lng).then(results => {
         const json = results.features[0].properties.address;
-        let stateAbbr = convertRegion(json.state);
-        setState(stateAbbr);
+        if (json.state) {
+          let stateAbbr = convertRegion(json.state);
+          setState(stateAbbr);
+        } else if (json.country) {
+          setState(json.country);
+        }
         if (json.locality) {
           setCity(json.locality);
         } else if (json.town) {

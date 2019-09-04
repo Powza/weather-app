@@ -26,9 +26,6 @@
       background: rgba(#fff, 0.3);
     }
   }
-  @media (max-width: 767px) {
-    //display: none;
-  }
 }
 .slide {
   padding: 8px 0;
@@ -83,6 +80,8 @@
     font-weight: 700;
     position: relative;
     &__background {
+      background-size: cover;
+      background-position: center;
       position: absolute;
       top: 0;
       right: 0;
@@ -144,6 +143,9 @@
       display: block;
       padding: 5px 0;
       border-bottom: 1px dashed rgba(#000, 0.2);
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.075);
+      }
       &:after {
         content: "";
         display: block;

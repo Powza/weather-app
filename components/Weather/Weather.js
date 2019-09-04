@@ -3,7 +3,8 @@ import { useStoreState } from "easy-peasy";
 import WeatherBackground from "./Background/Background";
 import Currently from "./Currently/Currently";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import WeatherSlider from "../Weather/WeatherSlider/WeatherSlider";
+import DailySlider from "../Weather/WeatherSlider/DailySlider/DailySlider";
+import HourlySlider from "../Weather/WeatherSlider/HourlySlider/HourlySlider";
 import { resetIdCounter } from "react-tabs";
 
 const weather = props => {
@@ -34,12 +35,11 @@ const weather = props => {
                 <Tab className="list-group-item">Daily</Tab>
                 <Tab className="list-group-item">Hourly</Tab>
               </TabList>
-
               <TabPanel>
-                <WeatherSlider day={weather && weather.daily.data} />
+                <DailySlider weather={weather} />
               </TabPanel>
               <TabPanel>
-                <WeatherSlider hour={weather && weather.hourly.data} />
+                <HourlySlider weather={weather} />
               </TabPanel>
             </Tabs>
           )}

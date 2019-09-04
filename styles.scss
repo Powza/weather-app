@@ -85,4 +85,52 @@ body {
       max-width: 100% !important;
     }
   }
+  :global(.table) {
+    tr {
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+    }
+    th,
+    td {
+      padding: 5px 0;
+      text-align: right;
+    }
+    thead,
+    tbody {
+      tr {
+        th {
+          &:first-child {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+  :global(.react-tabs) {
+    transition: 0.2s;
+    :global(.tab-group) {
+      margin-bottom: 10px;
+      list-style: none;
+      padding: 0;
+      text-align: center;
+      li {
+        border: 0;
+        outline: none;
+        padding: 3px 10px;
+        font-weight: 700;
+        display: inline-block;
+        margin: 0 10px;
+        border-bottom: 2px solid transparent;
+        color: #999;
+        background: none;
+        cursor: pointer;
+        &:hover {
+          color: #333;
+        }
+        &:global(.react-tabs__tab--selected) {
+          border-color: #000;
+          color: #000;
+        }
+      }
+    }
+  }
 }

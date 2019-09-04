@@ -12,8 +12,8 @@ const search = props => {
   const isMount = useIsMount();
 
   const searchOptions = {
-    types: ["(cities)"],
-    componentRestrictions: { country: "us" }
+    types: ["(cities)"]
+    //componentRestrictions: { country: "us" }
   };
 
   useEffect(() => {

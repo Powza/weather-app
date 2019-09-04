@@ -23,8 +23,12 @@ const index = () => {
   function getWeatherLocation(lat, lng) {
     fetchLocation(lat, lng).then(results => {
       const json = results.features[0].properties.address;
-      let stateAbbr = convertRegion(json.state);
-      setState(stateAbbr);
+      if (json.state) {
+        let stateAbbr = convertRegion(json.state);
+        setState(stateAbbr);
+      } else if (json.country) {
+        setState(json.country);
+      }
       if (json.locality) {
         setCity(json.locality);
       } else if (json.town) {
