@@ -1,7 +1,8 @@
 # Weather App
+
 Built with React, Next.js, DarkSky, Easy peasy
 
-```npm install weather-app```
+`npm install weather-app`
 
 ![Weather App](https://tinyminute.com/wordpress/wp-content/uploads/2019/08/weather-app-mockup-1.jpg)
 
