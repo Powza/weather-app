@@ -1,8 +1,8 @@
 [
   {
     "trade_name": "ipdata",
-    "uri": "https://api.ipdata.co/*?api-key=2960fb62def715e842a14818e3f697488e64b89e14440d32507c4d60",
-    "key": "",
+    "uri": "https://api.ipdata.co/*?api-key=#",
+    "key": "#",
     "result_pattern": "location.country_code",
     "is_free": false
   },

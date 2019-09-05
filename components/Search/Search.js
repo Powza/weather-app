@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useIsMount } from "../Hooks/useIsMount";
+import { useIsMount } from "../../utils/useIsMount";
 import { useStoreState } from "easy-peasy";
 import PlacesAutocomplete from "react-places-autocomplete";
 import styles from "./Search.scss";
@@ -23,6 +23,7 @@ const search = props => {
       } else {
         const script = document.createElement("script");
         script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.GOOGLE_MAPS_API_PLACES_KEY}&libraries=places&callback=myCallbackFunc`;
+        // script.src = `/api/google/&libraries=places&callback=myCallbackFunc`;
         script.id = "googleapis";
         script.async = true;
         script.defer = true;

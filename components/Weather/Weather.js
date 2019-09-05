@@ -15,21 +15,20 @@ const weather = props => {
   resetIdCounter();
 
   return (
-    <>
-      <div className={styles.weather}>
-        <WeatherBackground condition={weather && weather.currently.icon} />
+    <div className={styles.weather}>
+      <div className={styles["weather-wrap"]}>
         {spinner.spinner === true && <div className="loading-spinner"></div>}
-        <div className={styles["weather-wrap"]}>
-          <Currently
-            city={city}
-            state={state}
-            daily={weather && weather.daily}
-            currently={weather && weather.currently}
-            alerts={weather && weather.alerts}
-            flags={weather && weather.flags}
-          />
-
-          {weather && (
+        {weather && (
+          <>
+            <WeatherBackground condition={weather.currently.icon} />
+            <Currently
+              city={city}
+              state={state}
+              daily={weather.daily}
+              currently={weather.currently}
+              alerts={weather.alerts}
+              flags={weather.flags}
+            />
             <Tabs className={styles.tabs} selectedTabClassName={styles.selected}>
               <TabList className="list-group list-group-horizontal">
                 <Tab className="list-group-item">Daily</Tab>
@@ -42,10 +41,10 @@ const weather = props => {
                 <HourlySlider weather={weather} />
               </TabPanel>
             </Tabs>
-          )}
-        </div>
+          </>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

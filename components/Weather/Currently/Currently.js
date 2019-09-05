@@ -1,5 +1,5 @@
 import styles from "../Currently/Currently.scss";
-import WeatherIcon from "../../WeatherIcon/WeatherIcon";
+import WeatherIcon from "../WeatherIcon/WeatherIcon";
 import Units from "../Units/Units";
 import formatAsPercentage from "../../../utils/formateAsPercentage";
 import Alerts from "../Alerts/Alerts";

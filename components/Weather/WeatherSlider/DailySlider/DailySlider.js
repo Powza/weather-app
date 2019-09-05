@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import styles from "../../WeatherSlider/WeatherSlider.scss";
-import WeatherIcon from "../../../WeatherIcon/WeatherIcon";
+import WeatherIcon from "../../WeatherIcon/WeatherIcon";
 import Swiper from "react-id-swiper";
 import MicroModal from "react-micro-modal";
 import "react-micro-modal/dist/index.css";
@@ -39,7 +39,7 @@ const dailySlider = props => {
   };
   hourArray();
 
-  sliderInitialize = props.weather.daily.data.map((item, index) => {
+  sliderInitialize = props.weather.daily.data.slice(0, 8).map((item, index) => {
     const backgroundCondition = {
       backgroundImage: `url(/static/weatherBackgrounds/${item.icon}.jpg)`
     };
@@ -51,7 +51,7 @@ const dailySlider = props => {
           closeOnAnimationEnd={true}
           trigger={handleOpen => (
             <div onClick={handleOpen} target="_blank" className={[styles.slide, styles["slide-modal-btn"]].join(" ")}>
-              {moment().format("dddd") === moment.unix(item.time).format("dddd") ? (
+              {moment().format("dddd Do") === moment.unix(item.time).format("dddd Do") ? (
                 <div className={styles.date}>Today</div>
               ) : (
                 <div className={styles.date}>{moment.unix(item.time).format("ddd MMM Do")}</div>
@@ -70,7 +70,7 @@ const dailySlider = props => {
                 <button className={styles["modal__top__close"]} onClick={handleClose}>
                   ×
                 </button>
-                {moment().format("dddd") === moment.unix(item.time).format("dddd") ? (
+                {moment().format("dddd Do") === moment.unix(item.time).format("dddd Do") ? (
                   <h2 className={styles.date}>Today</h2>
                 ) : (
                   <h2 className={styles.date}>{moment.unix(item.time).format("dddd, MMMM Do")}</h2>

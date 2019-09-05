@@ -13,6 +13,8 @@ const header = props => {
   });
   const [isOpen, setIsOpen] = useState(false);
 
+  const weather = useStoreState(state => state.weather.weatherData);
+
   const setSpinner = useStoreActions(actions => actions.spinner.setSpinner);
   const setWeather = useStoreActions(actions => actions.weather.setWeatherData);
   const setLatitude = useStoreActions(actions => actions.location.setLocationLatitude);
@@ -132,39 +134,43 @@ const header = props => {
   const menuClass = `dropdown-menu dropdown-menu-right${isOpen ? " show" : ""} ${styles["dropdown-custom"]}`;
 
   return (
-    <header className={styles["header"]}>
-      <div className="container-fluid">
-        <div className="row">
-          <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 mx-auto">
-            <div className={styles.mid}>
-              <div className="input-group">
-                <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
-                <div className="input-group-append">
-                  <button
-                    className={[["btn"], styles["btn-more"]].join(" ")}
-                    type="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    onClick={toggleOpen}
-                  >
-                    <i className="fas fa-ellipsis-v"></i>
-                  </button>
-                  <div className={menuClass} aria-labelledby="dropdownMenuButton">
-                    <a className="dropdown-item" href="#" onClick={refreshLocation}>
-                      Refresh Weather
-                    </a>
-                    <a className="dropdown-item" href="#" onClick={useLocation}>
-                      Use My Location
-                    </a>
+    <>
+      {weather && (
+        <header className={styles["header"]}>
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 mx-auto">
+                <div className={styles.mid}>
+                  <div className="input-group">
+                    <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
+                    <div className="input-group-append">
+                      <button
+                        className={[["btn"], styles["btn-more"]].join(" ")}
+                        type="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        onClick={toggleOpen}
+                      >
+                        <i className="fas fa-ellipsis-v"></i>
+                      </button>
+                      <div className={menuClass} aria-labelledby="dropdownMenuButton">
+                        <a className="dropdown-item" href="#" onClick={refreshLocation}>
+                          Refresh Weather
+                        </a>
+                        <a className="dropdown-item" href="#" onClick={useLocation}>
+                          Use My Location
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </header>
+        </header>
+      )}
+    </>
   );
 };
 

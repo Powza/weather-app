@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useIsMount } from "../components/Hooks/useIsMount";
+import { useIsMount } from "../utils/useIsMount";
 import Layout from "../components/Layout";
 import Header from "../components/Header/Header";
 import Footer from "../components/Footer/Footer";
@@ -9,7 +9,7 @@ import Weather from "../components/Weather/Weather";
 import { getPosition, fetchLocation, fetchWeather } from "../api/APIUtils";
 import iplocation from "iplocation";
 
-import styles from "../styles.scss";
+import "../styles.scss";
 
 const index = () => {
   const setWeather = useStoreActions(actions => actions.weather.setWeatherData);
@@ -17,8 +17,8 @@ const index = () => {
   const setLongitude = useStoreActions(actions => actions.location.setLocationLongitude);
   const setCity = useStoreActions(actions => actions.location.setLocationCity);
   const setState = useStoreActions(actions => actions.location.setLocationState);
-  const isMount = useIsMount();
   const setSpinner = useStoreActions(actions => actions.spinner.setSpinner);
+  const isMount = useIsMount();
 
   function getWeatherLocation(lat, lng) {
     fetchLocation(lat, lng).then(results => {

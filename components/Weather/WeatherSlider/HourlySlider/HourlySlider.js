@@ -1,5 +1,5 @@
 import styles from "../../WeatherSlider/WeatherSlider.scss";
-import WeatherIcon from "../../../WeatherIcon/WeatherIcon";
+import WeatherIcon from "../../WeatherIcon/WeatherIcon";
 import Swiper from "react-id-swiper";
 import MicroModal from "react-micro-modal";
 import "react-micro-modal/dist/index.css";

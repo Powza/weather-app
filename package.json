@@ -4,6 +4,7 @@
   "description": "Interactive weather app",
   "private": true,
   "main": "index.js",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "dev": "node server.js",
     "build": "next build",
@@ -17,6 +18,9 @@
     "dotenv": "^8.1.0",
     "easy-peasy": "^3.0.2",
     "express": "^4.17.1",
+    "express-rate-limit": "^5.0.0",
+    "helmet": "^3.21.0",
+    "host-validation": "^2.0.1",
     "iplocation": "^6.1.0",
     "moment": "^2.24.0",
     "next": "^9.0.5",
