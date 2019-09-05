@@ -11,6 +11,9 @@
     "start": "NODE_ENV=production node server.js",
     "prod": "next export"
   },
+  "engines": {
+    "node": "10.15.3"
+  },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
