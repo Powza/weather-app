@@ -1,4 +1,4 @@
-const { parsed: localEnv } = require("dotenv").config();
+require("dotenv").config();
 const webpack = require("webpack");
 const withSass = require("@zeit/next-sass");
 const withCss = require("@zeit/next-css");
@@ -18,7 +18,7 @@ module.exports = compose([
   [withCss],
   {
     webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
-      config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
+      // config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
       config.node = {
         //console: false,
         fs: "empty",
