@@ -26,6 +26,9 @@ module.exports = compose([
         tls: "empty"
       };
       return config;
+    },
+    env: {
+      GOOGLE_MAPS_API_PLACES_KEY: process.env.GOOGLE_MAPS_API_PLACES_KEY
     }
   }
 ]);
