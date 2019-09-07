@@ -46,7 +46,7 @@ const hourlySlider = props => {
               ) : (
                 <div className={styles.date}>{moment.unix(item.time).format("ddd h a")}</div>
               )}
-              <WeatherIcon condition={item.icon} />
+              <WeatherIcon condition={item.icon} color="white" />
               <div className={styles.temp}>{Math.round(item.temperature)} °</div>
               {getCondition(item.icon)}
             </div>
@@ -146,6 +146,11 @@ const hourlySlider = props => {
                       {getDirection(item.windBearing)} ({item.windBearing} °)
                     </span>
                   </li>
+                  {item.precipAccumulation && (
+                    <li>
+                      <strong>Snowfall Accumulation</strong> <span>{item.precipAccumulation}"</span>
+                    </li>
+                  )}
                   <li>
                     <strong>Cloud Cover</strong> <span>{formatAsPercentage(item.cloudCover)}</span>
                   </li>

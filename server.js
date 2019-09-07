@@ -9,7 +9,7 @@ const handle = app.getRequestHandler();
 const request = require("request");
 
 const helmet = require("helmet");
-const hostValidation = require("host-validation");
+//const hostValidation = require("host-validation");
 const rateLimit = require("express-rate-limit");
 
 app
@@ -30,7 +30,7 @@ app
     server.get("/api/darkSky/:lat,:lng", (req, res) => {
       var dsURL = "https://api.darksky.net/forecast/";
       var dsSecret = process.env.DARK_SKY_API_KEY;
-      var dsSettings = "?exclude=minutely";
+      var dsSettings = "?extend=hourly&exclude=minutely";
       var url = dsURL + dsSecret + "/" + req.params.lat + "," + req.params.lng + dsSettings;
       req.pipe(request(url)).pipe(res);
     });

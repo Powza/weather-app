@@ -31,8 +31,9 @@
   padding: 8px 0;
   border-radius: 4px;
   transition: 0.2s;
-  @media (max-width: 767px) {
-    img {
+  img {
+    height: 60px;
+    @media (max-width: 767px) {
       height: 40px;
     }
   }
@@ -60,14 +61,8 @@
     font-size: 20px;
   }
   span {
-    color: #999;
-    margin-right: 5px;
-  }
-}
-
-.icon {
-  @media (max-width: 767px) {
-    height: 40px;
+    color: #2885c7;
+    margin-left: 5px;
   }
 }
 

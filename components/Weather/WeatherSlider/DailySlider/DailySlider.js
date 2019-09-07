@@ -56,9 +56,9 @@ const dailySlider = props => {
               ) : (
                 <div className={styles.date}>{moment.unix(item.time).format("ddd MMM Do")}</div>
               )}
-              <WeatherIcon condition={item.icon} />
+              <WeatherIcon condition={item.icon} color="white" />
               <div className={styles.temp}>
-                <span>{Math.round(item.temperatureLow)} °</span> {Math.round(item.temperatureHigh)} °
+                {Math.round(item.temperatureHigh)} ° <span>{Math.round(item.temperatureLow)} °</span>
               </div>
               <span>{getCondition(item.icon)}</span>
             </div>
@@ -181,6 +181,11 @@ const dailySlider = props => {
                           {getDirection(item.windBearing)} ({item.windBearing} °)
                         </span>
                       </li>
+                      {item.precipAccumulation && (
+                        <li>
+                          <strong>Snowfall Accumulation</strong> <span>{item.precipAccumulation}"</span>
+                        </li>
+                      )}
                       <li>
                         <strong>Cloud Cover</strong> <span>{formatAsPercentage(item.cloudCover)}</span>
                       </li>
@@ -218,10 +223,15 @@ const dailySlider = props => {
                                   if (moment.unix(hour.time).format("ddd") === moment.unix(item.time).format("ddd")) {
                                     return (
                                       <tr key={hour.time}>
-                                        <th scope="row">{moment.unix(hour.time).format("h a")}</th>
+                                        <th scope="row">
+                                          {moment.unix(hour.time).format("h a")}{" "}
+                                          <WeatherIcon condition={hour.icon} color="black" />
+                                        </th>
                                         <td>{Math.round(hour.apparentTemperature)} °</td>
                                         <td>{formatAsPercentage(hour.precipProbability)}</td>
-                                        <td>{Math.round(hour.windSpeed)} MPH</td>
+                                        <td>
+                                          {getDirection(item.windBearing)} {Math.round(hour.windSpeed)} MPH
+                                        </td>
                                       </tr>
                                     );
                                   }
