@@ -1,3 +1,16 @@
+export function calculatePressure(pressure) {
+  return parseFloat(pressure * 0.0295301).toFixed(2);
+}
+
+export function getDirection(angle) {
+  var directions = ["N", "NW", "W", "SW", "S", "SE", "E", "NE"];
+  return directions[Math.round(((angle %= 360) < 0 ? angle + 360 : angle) / 45) % 8];
+}
+
+export function formatAsPercentage(x) {
+  return `${Math.round(x * 100)} %`;
+};
+
 export function getCondition(condition) {
   switch (condition) {
     case "clear-day":
@@ -30,3 +43,5 @@ export function getCondition(condition) {
       console.log("Error: No Condition Set");
   }
 }
+
+
