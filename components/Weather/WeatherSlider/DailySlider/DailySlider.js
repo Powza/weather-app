@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import styles from "../../WeatherSlider/WeatherSlider.scss";
 import WeatherIcon from "../../WeatherIcon/WeatherIcon";
 import Swiper from "react-id-swiper";
@@ -11,7 +10,6 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 const dailySlider = props => {
   const [swiper, updateSwiper] = useState(null);
-  const [hour, setHour] = useState(props.weather.hourly.data);
 
   const goNext = () => {
     if (swiper !== null) {
@@ -25,17 +23,17 @@ const dailySlider = props => {
     }
   };
 
+  let checkHour = props.weather.hourly.data;
+  const hourArray = () => {
+    let newArray = checkHour.map(object => moment.unix(object.time).format("M/D/YYYY"));
+    let oneDay = [...new Set(newArray)];
+    return oneDay;
+  };
+
   let slider = null;
   let sliderInitialize = null;
 
   let moment = require("moment");
-
-  const hourArray = () => {
-    const newArray = hour.map(object => moment.unix(object.time).format("ddd"));
-    const oneDay = [...new Set(newArray)];
-    return oneDay;
-  };
-  hourArray();
 
   sliderInitialize = props.weather.daily.data.slice(0, 8).map((item, index) => {
     const backgroundCondition = {
@@ -121,7 +119,7 @@ const dailySlider = props => {
                   <TabList className="tab-group">
                     <Tab className="tab-item">Daily Summary</Tab>
                     {hourArray().map((dataTime, index) => {
-                      if (dataTime === moment.unix(item.time).format("ddd")) {
+                      if (dataTime === moment.unix(item.time).format("M/D/YYYY")) {
                         return (
                           <Tab key={index} className="tab-item">
                             By The Hour
@@ -198,7 +196,7 @@ const dailySlider = props => {
                   </TabPanel>
 
                   {hourArray().map((dataTime, index) => {
-                    if (dataTime === moment.unix(item.time).format("ddd")) {
+                    if (dataTime === moment.unix(item.time).format("M/D/YYYY")) {
                       return (
                         <TabPanel key={index}>
                           <div className="table-responsive-sm">
@@ -212,12 +210,12 @@ const dailySlider = props => {
                                 </tr>
                               </thead>
                               <tbody>
-                                {hour.map((hour, index) => {
-                                  if (moment.unix(hour.time).format("ddd") === moment.unix(item.time).format("ddd")) {
+                                {checkHour.map((hour, index) => {
+                                  if (moment.unix(hour.time).format("MMMM Do YYYY") === moment.unix(item.time).format("MMMM Do YYYY")) {
                                     return (
                                       <tr key={hour.time}>
                                         <th scope="row">
-                                          {moment.unix(hour.time).format("ddd h a")} <WeatherIcon condition={hour.icon} color="black" />
+                                          {moment.unix(hour.time).format("h a")} <WeatherIcon condition={hour.icon} color="black" />
                                         </th>
                                         <td>{Math.round(hour.apparentTemperature)} °</td>
                                         <td>{formatAsPercentage(hour.precipProbability)}</td>

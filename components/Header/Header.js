@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import { useIsMount } from "../../utils/useIsMount";
+import { useState } from "react";
 import styles from "./Header.scss";
 import { geocodeByAddress } from "react-places-autocomplete";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -28,8 +27,6 @@ const header = props => {
   const latitude = useStoreState(state => state.location.locationLatitude);
   const longitude = useStoreState(state => state.location.locationLongitude);
 
-  const isMount = useIsMount();
-
   let historyArray = null;
   let searchHistory = null;
   if (typeof window !== "undefined") {
@@ -41,7 +38,6 @@ const header = props => {
     let newHistory = [...searchHistory];
     newHistory.splice(index, 1);
     localStorage.setItem("search-history", JSON.stringify(newHistory));
-    console.log(newHistory);
     if (newHistory === undefined || newHistory.length == 0) {
       localStorage.removeItem("search-history");
     }
