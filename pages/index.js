@@ -38,7 +38,10 @@ const index = () => {
         setCity(json.county);
       }
     });
-    fetchWeather(lat, lng).then(results => setWeather(results));
+    fetchWeather(lat, lng).then(results => {
+      setWeather(results);
+      setSpinner(false);
+    });
   }
 
   useEffect(() => {
@@ -51,8 +54,6 @@ const index = () => {
           setLatitude(lat);
           setLongitude(lng);
           getWeatherLocation(lat, lng);
-          console.log("Geolocation Status: Success");
-          setSpinner(false);
         })
         .catch(error => {
           const publicIp = require("public-ip");

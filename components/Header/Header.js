@@ -46,7 +46,12 @@ const header = props => {
   const useSpecificHistory = index => {
     let newHistory = [...searchHistory];
     setSpinner(true);
-    getWeatherLocation(newHistory[index].lat, newHistory[index].lng);
+    setCity(newHistory[index].city);
+    setState(newHistory[index].state);
+    fetchWeather(newHistory[index].lat, newHistory[index].lng).then(results => {
+      setWeather(results);
+      setSpinner(false);
+    });
   };
 
   const handleSearchChange = address => {
@@ -65,7 +70,6 @@ const header = props => {
         setLatitude(lat);
         setLongitude(lng);
         setSearch({ address: "" });
-        setSpinner(false);
         for (var i = 0; i < dataAddress.length; i += 1) {
           var addressObj = dataAddress[i];
           for (var j = 0; j < addressObj.types.length; j += 1) {
@@ -81,7 +85,10 @@ const header = props => {
         }
         historyArray.push({ city: city, state: state, lat: lat, lng: lng });
         localStorage.setItem("search-history", JSON.stringify(historyArray));
-        fetchWeather(lat, lng).then(results => setWeather(results));
+        fetchWeather(lat, lng).then(results => {
+          setWeather(results);
+          setSpinner(false);
+        });
       })
       .catch(error => console.error(error));
   };
@@ -115,8 +122,10 @@ const header = props => {
         setCity(json.county);
       }
     });
-    fetchWeather(lat, lng).then(results => setWeather(results));
-    setSpinner(false);
+    fetchWeather(lat, lng).then(results => {
+      setWeather(results);
+      setSpinner(false);
+    });
   }
 
   const useLocation = () => {
