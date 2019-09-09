@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useIsMount } from "../../utils/useIsMount";
 import styles from "./Header.scss";
 import { geocodeByAddress } from "react-places-autocomplete";
 import { useStoreActions, useStoreState } from "easy-peasy";
@@ -7,11 +8,13 @@ import { convertRegion } from "../../utils/stateNameAbbreviation";
 import { getPosition, fetchLocation, fetchWeather } from "../../api/APIUtils";
 import iplocation from "iplocation";
 
+import { InputGroupButtonDropdown, Badge, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+
 const header = props => {
   const [search, setSearch] = useState({
     address: ""
   });
-  const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const weather = useStoreState(state => state.weather.weatherData);
 
@@ -25,6 +28,31 @@ const header = props => {
   const latitude = useStoreState(state => state.location.locationLatitude);
   const longitude = useStoreState(state => state.location.locationLongitude);
 
+  const isMount = useIsMount();
+
+  let historyArray = null;
+  let searchHistory = null;
+  if (typeof window !== "undefined") {
+    historyArray = localStorage.getItem("search-history") ? JSON.parse(localStorage.getItem("search-history")) : [];
+    searchHistory = JSON.parse(localStorage.getItem("search-history"));
+  }
+
+  const deleteSpecificHistory = index => {
+    let newHistory = [...searchHistory];
+    newHistory.splice(index, 1);
+    localStorage.setItem("search-history", JSON.stringify(newHistory));
+    console.log(newHistory);
+    if (newHistory === undefined || newHistory.length == 0) {
+      localStorage.removeItem("search-history");
+    }
+  };
+
+  const useSpecificHistory = index => {
+    let newHistory = [...searchHistory];
+    setSpinner(true);
+    getWeatherLocation(newHistory[index].lat, newHistory[index].lng);
+  };
+
   const handleSearchChange = address => {
     setSearch({ address });
   };
@@ -36,6 +64,8 @@ const header = props => {
         const dataAddress = data.address_components;
         const lat = data.geometry.location.lat();
         const lng = data.geometry.location.lng();
+        let city = null;
+        let state = null;
         setLatitude(lat);
         setLongitude(lng);
         setSearch({ address: "" });
@@ -45,53 +75,57 @@ const header = props => {
           for (var j = 0; j < addressObj.types.length; j += 1) {
             if (addressObj.types[j] === "locality") {
               setCity(addressObj.long_name);
+              city = addressObj.long_name;
             }
             if (addressObj.types[j] === "administrative_area_level_1") {
               setState(addressObj.short_name);
+              state = addressObj.short_name;
             }
           }
         }
-
+        historyArray.push({ city: city, state: state, lat: lat, lng: lng });
+        localStorage.setItem("search-history", JSON.stringify(historyArray));
         fetchWeather(lat, lng).then(results => setWeather(results));
       })
       .catch(error => console.error(error));
   };
 
-  const toggleOpen = () => setIsOpen(!isOpen);
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const refreshLocation = () => {
     setSpinner(true);
-    setIsOpen(!isOpen);
     fetchWeather(latitude, longitude).then(results => {
       setWeather(results);
       setSpinner(false);
     });
   };
 
+  function getWeatherLocation(lat, lng) {
+    fetchLocation(lat, lng).then(results => {
+      const json = results.features[0].properties.address;
+      if (json.state) {
+        let stateAbbr = convertRegion(json.state);
+        setState(stateAbbr);
+      } else if (json.country) {
+        setState(json.country);
+      }
+      if (json.locality) {
+        setCity(json.locality);
+      } else if (json.town) {
+        setCity(json.town);
+      } else if (json.city) {
+        setCity(json.city);
+      } else if (json.county) {
+        setCity(json.county);
+      }
+    });
+    fetchWeather(lat, lng).then(results => setWeather(results));
+    setSpinner(false);
+  }
+
   const useLocation = () => {
     setSpinner(true);
-    setIsOpen(!isOpen);
-    function getWeatherLocation(lat, lng) {
-      fetchLocation(lat, lng).then(results => {
-        const json = results.features[0].properties.address;
-        if (json.state) {
-          let stateAbbr = convertRegion(json.state);
-          setState(stateAbbr);
-        } else if (json.country) {
-          setState(json.country);
-        }
-        if (json.locality) {
-          setCity(json.locality);
-        } else if (json.town) {
-          setCity(json.town);
-        } else if (json.city) {
-          setCity(json.city);
-        } else if (json.county) {
-          setCity(json.county);
-        }
-      });
-      fetchWeather(lat, lng).then(results => setWeather(results));
-    }
+    setDropdownOpen(!dropdownOpen);
     getPosition()
       .then(results => {
         const lat = results.coords.latitude;
@@ -99,7 +133,6 @@ const header = props => {
         setLatitude(lat);
         setLongitude(lng);
         getWeatherLocation(lat, lng);
-        console.log("Geolocation Status: Success");
         setSpinner(false);
       })
       .catch(error => {
@@ -131,8 +164,6 @@ const header = props => {
       });
   };
 
-  const menuClass = `dropdown-menu dropdown-menu-right${isOpen ? " show" : ""} ${styles["dropdown-custom"]}`;
-
   return (
     <>
       {weather && (
@@ -143,26 +174,42 @@ const header = props => {
                 <div className={styles.mid}>
                   <div className="input-group">
                     <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
-                    <div className="input-group-append">
-                      <button
-                        className={[["btn"], styles["btn-more"]].join(" ")}
-                        type="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        onClick={toggleOpen}
-                      >
+                    <InputGroupButtonDropdown addonType="append" isOpen={dropdownOpen} toggle={toggleDropdown}>
+                      <DropdownToggle className={styles["btn-more"]}>
                         <i className="fas fa-ellipsis-v"></i>
-                      </button>
-                      <div className={menuClass} aria-labelledby="dropdownMenuButton">
-                        <a className="dropdown-item" href="#" onClick={refreshLocation}>
-                          Refresh Weather
-                        </a>
-                        <a className="dropdown-item" href="#" onClick={useLocation}>
-                          Use My Location
-                        </a>
-                      </div>
-                    </div>
+                      </DropdownToggle>
+                      <DropdownMenu right>
+                        <DropdownItem onClick={refreshLocation}>Refresh Weather</DropdownItem>
+                        <DropdownItem onClick={useLocation}>Use My Location</DropdownItem>
+                        {searchHistory != null && (
+                          <>
+                            <DropdownItem divider />
+                            <DropdownItem header>Search History</DropdownItem>
+                            {searchHistory.map((item, index) => {
+                              return (
+                                <DropdownItem key={index}>
+                                  <span
+                                    onClick={() => {
+                                      useSpecificHistory(index);
+                                    }}
+                                  >
+                                    {item.city}, {item.state}
+                                  </span>
+                                  <span
+                                    className={styles["btn-remove"]}
+                                    onClick={() => {
+                                      deleteSpecificHistory(index);
+                                    }}
+                                  >
+                                    <i className="far fa-trash-alt"></i>
+                                  </span>
+                                </DropdownItem>
+                              );
+                            })}
+                          </>
+                        )}
+                      </DropdownMenu>
+                    </InputGroupButtonDropdown>
                   </div>
                 </div>
               </div>

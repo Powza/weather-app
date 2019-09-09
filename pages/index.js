@@ -8,7 +8,6 @@ import { convertRegion } from "../utils/stateNameAbbreviation";
 import Weather from "../components/Weather/Weather";
 import { getPosition, fetchLocation, fetchWeather } from "../api/APIUtils";
 import iplocation from "iplocation";
-
 import "../styles.scss";
 
 const index = () => {
