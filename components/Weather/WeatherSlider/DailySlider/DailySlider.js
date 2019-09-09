@@ -135,7 +135,7 @@ const dailySlider = props => {
                       <li>
                         <strong>Temperature</strong>{" "}
                         <span>
-                          {Math.round(item.temperatureLow)} ° / {Math.round(item.temperatureHigh)} °
+                          Min {Math.round(item.apparentTemperatureMin)} ° / Max {Math.round(item.apparentTemperatureMax)} °
                         </span>
                       </li>
                       <li>
