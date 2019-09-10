@@ -1,14 +1,28 @@
 # Weather App
 
-Built using React, Next.js, DarkSky, Easy Peasy.
+Built using React, Next.js, DarkSkyAPI, Google Autocomplete and Easy Peasy.
 
 This app shows up to 168 hourly weather, saves search history, uses location, and shows all weather details from API. Click a day or hour to see all details.
 
-`npm install weather-app`
+What you can do:
+
+- Search by location or zip code.
+- Option to refresh weather data, use location, save or clear search history.
+- Shows hourly weather up to 168 hours. Clicking on a day will show remaining hours
+- Shows current data.
+- Clicking on a day or hour with show all available details
+
+## See Live Project
+
+[weather.tinyminute.com](https://weather.tinyminute.com/)
 
 ![Weather App](https://tinyminute.com/wordpress/wp-content/uploads/2019/08/weather-app-mockup.jpg)
 
-## Must create a .env file in root with your API keys
+## Installing
+
+`npm install weather-app`
+
+### Must create a .env file in root with your API keys
 
 ```
 # Google Maps
