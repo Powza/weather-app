@@ -226,7 +226,7 @@ const header = props => {
                                       deleteSpecificHistory(index);
                                     }}
                                   >
-                                    <i class="fas fa-minus-circle"></i>
+                                    <i className="fas fa-minus-circle"></i>
                                   </span>
                                 </DropdownItem>
                               );
