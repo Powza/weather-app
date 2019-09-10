@@ -27,7 +27,6 @@
   width: 40px;
   color: rgba(#fff, 1);
   background: rgba(#fff, 0.1);
-  outline: none;
   &:hover {
     color: #fff;
     background: rgba(#fff, 0.3);
@@ -36,10 +35,25 @@
 
 .btn-remove {
   color: red;
+}
+.btn-right {
   margin-left: 10px;
   float: right;
+}
+.btn-last {
+  text-align: center;
+  font-weight: 700;
 }
 
 .dropdown-custom {
   margin-top: 0;
+  top: 55px !important;
+  right: 0 !important;
+  transform: none !important;
+  button {
+    &:hover {
+      background: #eee;
+      color: #000;
+    }
+  }
 }

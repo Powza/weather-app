@@ -262,7 +262,7 @@ const dailySlider = props => {
         slidesPerView: 3
       },
       320: {
-        slidesPerView: 1
+        slidesPerView: 2
       }
     }
   };

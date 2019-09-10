@@ -12,7 +12,7 @@ const search = props => {
   const isMount = useIsMount();
 
   const searchOptions = {
-    types: ["(cities)"]
+    types: ["(regions)"]
     //componentRestrictions: { country: "us" }
   };
 
@@ -54,11 +54,11 @@ const search = props => {
           readyStatus = "Loading Weather Data...";
         }
         if (weather !== "") {
-          readyStatus = "Search a City";
+          readyStatus = "Search location, zip...";
         }
 
         return (
-          <div className={styles.search}>
+          <>
             <input
               placeholder={`${readyStatus}`}
               value={props.address}
@@ -86,7 +86,7 @@ const search = props => {
                 );
               })}
             </div>
-          </div>
+          </>
         );
       }}
     </PlacesAutocomplete>

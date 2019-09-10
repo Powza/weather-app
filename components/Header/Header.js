@@ -7,7 +7,7 @@ import { convertRegion } from "../../utils/stateNameAbbreviation";
 import { getPosition, fetchLocation, fetchWeather } from "../../api/APIUtils";
 import iplocation from "iplocation";
 
-import { InputGroupButtonDropdown, Badge, DropdownToggle, DropdownMenu, DropdownItem } from "reactstrap";
+import { InputGroupButtonDropdown, Badge, DropdownToggle, DropdownMenu, DropdownItem, InputGroup } from "reactstrap";
 
 const header = props => {
   const [search, setSearch] = useState({
@@ -32,7 +32,16 @@ const header = props => {
   if (typeof window !== "undefined") {
     historyArray = localStorage.getItem("search-history") ? JSON.parse(localStorage.getItem("search-history")) : [];
     searchHistory = JSON.parse(localStorage.getItem("search-history"));
+    if (searchHistory === undefined) {
+      const keys = ["city", "state"],
+        filtered = searchHistory.filter((s => o => (k => !s.has(k) && s.add(k))(keys.map(k => o[k]).join("|")))(new Set()));
+      localStorage.setItem("search-history", JSON.stringify(filtered));
+    }
   }
+
+  const clearAllHistory = () => {
+    localStorage.removeItem("search-history");
+  };
 
   const deleteSpecificHistory = index => {
     let newHistory = [...searchHistory];
@@ -70,9 +79,9 @@ const header = props => {
         setLatitude(lat);
         setLongitude(lng);
         setSearch({ address: "" });
-        for (var i = 0; i < dataAddress.length; i += 1) {
+        for (var i = 0; i < dataAddress.length; i++) {
           var addressObj = dataAddress[i];
-          for (var j = 0; j < addressObj.types.length; j += 1) {
+          for (var j = 0; j < addressObj.types.length; j++) {
             if (addressObj.types[j] === "locality") {
               setCity(addressObj.long_name);
               city = addressObj.long_name;
@@ -177,19 +186,29 @@ const header = props => {
             <div className="row">
               <div className="col-sm-12 col-md-6 col-lg-6 col-xl-4 mx-auto">
                 <div className={styles.mid}>
-                  <div className="input-group">
+                  <InputGroup>
                     <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
                     <InputGroupButtonDropdown addonType="append" isOpen={dropdownOpen} toggle={toggleDropdown}>
                       <DropdownToggle className={styles["btn-more"]}>
                         <i className="fas fa-ellipsis-v"></i>
                       </DropdownToggle>
-                      <DropdownMenu right>
-                        <DropdownItem onClick={refreshLocation}>Refresh Weather</DropdownItem>
-                        <DropdownItem onClick={useLocation}>Use My Location</DropdownItem>
+                      <DropdownMenu right className={styles["dropdown-custom"]}>
+                        <DropdownItem onClick={refreshLocation}>
+                          Refresh Weather
+                          <span className={styles["btn-right"]}>
+                            <i className="fas fa-sync"></i>
+                          </span>
+                        </DropdownItem>
+                        <DropdownItem onClick={useLocation}>
+                          Use My Location
+                          <span className={styles["btn-right"]}>
+                            <i className="fas fa-location-arrow"></i>
+                          </span>
+                        </DropdownItem>
                         {searchHistory != null && (
                           <>
                             <DropdownItem divider />
-                            <DropdownItem header>Search History</DropdownItem>
+                            <DropdownItem header>Search History </DropdownItem>
                             {searchHistory.map((item, index) => {
                               return (
                                 <DropdownItem key={index}>
@@ -200,22 +219,32 @@ const header = props => {
                                   >
                                     {item.city}, {item.state}
                                   </span>
+
                                   <span
-                                    className={styles["btn-remove"]}
+                                    className={[styles["btn-remove"], styles["btn-right"]].join(" ")}
                                     onClick={() => {
                                       deleteSpecificHistory(index);
                                     }}
                                   >
-                                    <i className="far fa-trash-alt"></i>
+                                    <i class="fas fa-minus-circle"></i>
                                   </span>
                                 </DropdownItem>
                               );
                             })}
+                            <DropdownItem divider />
+                            <DropdownItem
+                              className={styles["btn-last"]}
+                              onClick={() => {
+                                clearAllHistory();
+                              }}
+                            >
+                              Clear Search History
+                            </DropdownItem>
                           </>
                         )}
                       </DropdownMenu>
                     </InputGroupButtonDropdown>
-                  </div>
+                  </InputGroup>
                 </div>
               </div>
             </div>

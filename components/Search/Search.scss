@@ -1,19 +1,18 @@
-.search {
-  position: relative;
-  flex: 1 1 auto;
-  width: 1%;
-}
 .list-group {
   position: absolute;
+  top: 55px;
   left: 0;
   right: 0;
-  border-top-left-radius: 0;
+  border-radius: 4px;
+  background: #fff;
   :global(.list-group-item) {
     cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: 0;
   }
   :global(.active) {
-    background: #999;
-    border-color: #999;
+    background: #eee;
+    color: #000;
   }
 }
 
@@ -21,8 +20,6 @@
   border: 0;
   font-weight: 700;
   height: 50px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
   color: rgba(#fff, 1);
   background: rgba(#fff, 0.1);
   box-shadow: none;
