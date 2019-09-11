@@ -133,7 +133,8 @@ const dailySlider = props => {
                       <li>
                         <strong>Temperature</strong>{" "}
                         <span>
-                          Min {Math.round(item.apparentTemperatureMin)} ° / Max {Math.round(item.apparentTemperatureMax)} °
+                          Min {Math.round(item.apparentTemperatureMin)} ° / Max{" "}
+                          {Math.round(item.apparentTemperatureMax)} °
                         </span>
                       </li>
                       <li>
@@ -147,20 +148,11 @@ const dailySlider = props => {
                         <span>
                           {
                             Moon.phase(
-                              moment.unix(item.time).format("YYYY"),
-                              moment.unix(item.time).format("M") + 1,
-                              moment.unix(item.time).format("D")
+                              parseInt(moment.unix(item.time).format("YYYY")),
+                              parseInt(moment.unix(item.time).format("M")),
+                              parseInt(moment.unix(item.time).format("D"))
                             ).name
-                          }{" "}
-                          (
-                          {
-                            Moon.phase(
-                              moment.unix(item.time).format("YYYY"),
-                              moment.unix(item.time).format("M") + 1,
-                              moment.unix(item.time).format("D")
-                            ).phase
                           }
-                          )
                         </span>
                       </li>
                       <li>
@@ -211,11 +203,15 @@ const dailySlider = props => {
                               </thead>
                               <tbody>
                                 {checkHour.map((hour, index) => {
-                                  if (moment.unix(hour.time).format("MMMM Do YYYY") === moment.unix(item.time).format("MMMM Do YYYY")) {
+                                  if (
+                                    moment.unix(hour.time).format("MMMM Do YYYY") ===
+                                    moment.unix(item.time).format("MMMM Do YYYY")
+                                  ) {
                                     return (
                                       <tr key={hour.time}>
                                         <th scope="row">
-                                          {moment.unix(hour.time).format("h a")} <WeatherIcon condition={hour.icon} color="black" />
+                                          {moment.unix(hour.time).format("h a")}{" "}
+                                          <WeatherIcon condition={hour.icon} color="black" />
                                         </th>
                                         <td>{Math.round(hour.apparentTemperature)} °</td>
                                         <td>{formatAsPercentage(hour.precipProbability)}</td>

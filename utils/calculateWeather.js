@@ -9,7 +9,7 @@ export function getDirection(angle) {
 
 export function formatAsPercentage(x) {
   return `${Math.round(x * 100)} %`;
-};
+}
 
 export function getCondition(condition) {
   switch (condition) {
@@ -43,5 +43,3 @@ export function getCondition(condition) {
       console.log("Error: No Condition Set");
   }
 }
-
-

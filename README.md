@@ -20,7 +20,7 @@ What you can do:
 
 ## Installing
 
-`npm install weather-app`
+`npm install`
 
 ### Must create a .env file in root with your API keys
 

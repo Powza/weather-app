@@ -114,20 +114,11 @@ const hourlySlider = props => {
                     <span>
                       {
                         Moon.phase(
-                          moment.unix(item.time).format("YYYY"),
-                          moment.unix(item.time).format("M") + 1,
-                          moment.unix(item.time).format("D")
+                          parseInt(moment.unix(item.time).format("YYYY")),
+                          parseInt(moment.unix(item.time).format("M")),
+                          parseInt(moment.unix(item.time).format("D"))
                         ).name
-                      }{" "}
-                      (
-                      {
-                        Moon.phase(
-                          moment.unix(item.time).format("YYYY"),
-                          moment.unix(item.time).format("M") + 1,
-                          moment.unix(item.time).format("D")
-                        ).phase
                       }
-                      )
                     </span>
                   </li>
                   <li>
