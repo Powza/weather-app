@@ -4,8 +4,7 @@ import Swiper from "react-id-swiper";
 import MicroModal from "react-micro-modal";
 import "react-micro-modal/dist/index.css";
 import { useState } from "react";
-import { getDirection, getCondition, calculatePressure, formatAsPercentage } from "../../../../utils/calculateWeather";
-import Moon from "../../../../utils/getMoonPhase";
+import { getDirection, getCondition, calculatePressure, formatAsPercentage, Moon } from "../../../../utils/calculateWeather";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 
 const dailySlider = props => {
@@ -133,8 +132,7 @@ const dailySlider = props => {
                       <li>
                         <strong>Temperature</strong>{" "}
                         <span>
-                          Min {Math.round(item.apparentTemperatureMin)} ° / Max{" "}
-                          {Math.round(item.apparentTemperatureMax)} °
+                          Min {Math.round(item.apparentTemperatureMin)} ° / Max {Math.round(item.apparentTemperatureMax)} °
                         </span>
                       </li>
                       <li>
@@ -203,15 +201,11 @@ const dailySlider = props => {
                               </thead>
                               <tbody>
                                 {checkHour.map((hour, index) => {
-                                  if (
-                                    moment.unix(hour.time).format("MMMM Do YYYY") ===
-                                    moment.unix(item.time).format("MMMM Do YYYY")
-                                  ) {
+                                  if (moment.unix(hour.time).format("MMMM Do YYYY") === moment.unix(item.time).format("MMMM Do YYYY")) {
                                     return (
                                       <tr key={hour.time}>
                                         <th scope="row">
-                                          {moment.unix(hour.time).format("h a")}{" "}
-                                          <WeatherIcon condition={hour.icon} color="black" />
+                                          {moment.unix(hour.time).format("h a")} <WeatherIcon condition={hour.icon} color="black" />
                                         </th>
                                         <td>{Math.round(hour.apparentTemperature)} °</td>
                                         <td>{formatAsPercentage(hour.precipProbability)}</td>

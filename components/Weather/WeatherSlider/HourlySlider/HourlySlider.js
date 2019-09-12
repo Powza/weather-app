@@ -4,8 +4,7 @@ import Swiper from "react-id-swiper";
 import MicroModal from "react-micro-modal";
 import "react-micro-modal/dist/index.css";
 import { useState } from "react";
-import { getDirection, getCondition, calculatePressure, formatAsPercentage } from "../../../../utils/calculateWeather";
-import Moon from "../../../../utils/getMoonPhase";
+import { getDirection, getCondition, calculatePressure, formatAsPercentage, Moon } from "../../../../utils/calculateWeather";
 
 const hourlySlider = props => {
   const [swiper, updateSwiper] = useState(null);
