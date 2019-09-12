@@ -1,6 +1,4 @@
 import Head from "next/head";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default ({ children, title = "Weather" }) => (
   <>
@@ -8,6 +6,5 @@ export default ({ children, title = "Weather" }) => (
       <title>{title}</title>
     </Head>
     {children}
-    <ToastContainer />
   </>
 );
