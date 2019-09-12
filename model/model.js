@@ -11,7 +11,7 @@ const location = {
   locationLatitude: "",
   locationLongitude: "",
   locationCity: "",
-  locationState: "",
+  locationRegion: "",
 
   setLocationLatitude: action((state, locationLatitude) => {
     state.locationLatitude = locationLatitude;
@@ -22,8 +22,8 @@ const location = {
   setLocationCity: action((state, locationCity) => {
     state.locationCity = locationCity;
   }),
-  setLocationState: action((state, locationState) => {
-    state.locationState = locationState;
+  setLocationRegion: action((state, locationRegion) => {
+    state.locationRegion = locationRegion;
   })
 };
 

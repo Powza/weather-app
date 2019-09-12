@@ -15,7 +15,7 @@ const index = () => {
   const setLatitude = useStoreActions(actions => actions.location.setLocationLatitude);
   const setLongitude = useStoreActions(actions => actions.location.setLocationLongitude);
   const setCity = useStoreActions(actions => actions.location.setLocationCity);
-  const setState = useStoreActions(actions => actions.location.setLocationState);
+  const setRegion = useStoreActions(actions => actions.location.setLocationRegion);
   const setSpinner = useStoreActions(actions => actions.spinner.setSpinner);
   const isMount = useIsMount();
 
@@ -24,9 +24,9 @@ const index = () => {
       const json = results.features[0].properties.address;
       if (json.state) {
         let stateAbbr = convertRegion(json.state);
-        setState(stateAbbr);
+        setRegion(stateAbbr);
       } else if (json.country) {
-        setState(json.country);
+        setRegion(json.country);
       }
       if (json.locality) {
         setCity(json.locality);
