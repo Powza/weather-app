@@ -11,7 +11,7 @@ const weather = props => {
   const spinner = useStoreState(state => state.spinner);
   const weather = useStoreState(state => state.weather.weatherData);
   const city = useStoreState(state => state.location.locationCity);
-  const state = useStoreState(state => state.location.locationState);
+  const region = useStoreState(state => state.location.locationRegion);
   resetIdCounter();
 
   return (
@@ -23,7 +23,7 @@ const weather = props => {
             <WeatherBackground condition={weather.currently.icon} />
             <Currently
               city={city}
-              state={state}
+              region={region}
               daily={weather.daily}
               currently={weather.currently}
               alerts={weather.alerts}

@@ -17,7 +17,7 @@ const currently = props => {
             <div className={styles.summary}>{props.currently.summary}</div>
             <div className={styles.location}>
               {props.city && props.city}
-              {props.city !== "" && props.state !== "" ? "," : ""} {props.state}
+              {props.city !== "" && props.region !== "" ? "," : ""} {props.region}
             </div>
             <div className={styles.temp}>
               {props.currently.temperature && Math.round(props.currently.temperature)} <Units flags={props.flags} />

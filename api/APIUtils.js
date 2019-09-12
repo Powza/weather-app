@@ -17,9 +17,16 @@ export function fetchLocation(latitude, longitude) {
     .catch(error => console.error(error));
 }
 
+export function fetchIpLocationData(ip) {
+  let query = "?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,query";
+  return fetch(`http://ip-api.com/json/${ip}${query}`, { method: "GET" })
+    .then(response => response.json())
+    .catch(error => console.error(error));
+}
+
 // Get weather from coordinates
 export function fetchWeather(latitude, longitude) {
-  let proxy = "https://cors-anywhere.herokuapp.com/";
+  // let proxy = "https://cors-anywhere.herokuapp.com/";
   return (
     fetch(`/api/darksky/${latitude},${longitude}`)
       // fetch(

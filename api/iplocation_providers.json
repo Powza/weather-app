@@ -1,5 +1,12 @@
 [
   {
+    "trade_name": "ip-api",
+    "uri": "http://ip-api.com/json/*",
+    "key": "",
+    "result_pattern": "location",
+    "is_free": true
+  },
+  {
     "trade_name": "ipdata",
     "uri": "https://api.ipdata.co/*?api-key=#",
     "key": "#",
