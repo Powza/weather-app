@@ -217,7 +217,7 @@ const header = props => {
                                       useSpecificHistory(index);
                                     }}
                                   >
-                                    {item.city}, {item.state}
+                                    {item.city}, {item.region}
                                   </span>
 
                                   <span
