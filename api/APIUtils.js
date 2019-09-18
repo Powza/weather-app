@@ -1,7 +1,7 @@
 // Get user position coordinates
 export function getPosition() {
   const geolocationOptions = {
-    enableHighAccuracy: false,
+    enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 10000
   };
