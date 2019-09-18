@@ -6,8 +6,7 @@ import Footer from "../components/Footer/Footer";
 import { useStoreActions } from "easy-peasy";
 import { convertRegion } from "../utils/stateNameAbbreviation";
 import Weather from "../components/Weather/Weather";
-import { getPosition, fetchLocation, fetchWeather } from "../api/APIUtils";
-import iplocation from "iplocation";
+import { fetchWeather, ipInfo, ipData } from "../api/APIUtils";
 import "../styles.scss";
 
 const index = () => {
@@ -19,69 +18,45 @@ const index = () => {
   const setSpinner = useStoreActions(actions => actions.spinner.setSpinner);
   const isMount = useIsMount();
 
-  function getWeatherLocation(lat, lng) {
-    fetchLocation(lat, lng).then(results => {
-      const json = results.features[0].properties.address;
-      if (json.state) {
-        let stateAbbr = convertRegion(json.state);
-        setRegion(stateAbbr);
-      } else if (json.country) {
-        setRegion(json.country);
-      }
-      if (json.locality) {
-        setCity(json.locality);
-      } else if (json.town) {
-        setCity(json.town);
-      } else if (json.city) {
-        setCity(json.city);
-      } else if (json.county) {
-        setCity(json.county);
-      }
-    });
-    fetchWeather(lat, lng).then(results => {
-      setWeather(results);
-      setSpinner(false);
-    });
-  }
-
   useEffect(() => {
     setSpinner(true);
     if (isMount) {
-      getPosition()
-        .then(results => {
-          const lat = results.coords.latitude;
-          const lng = results.coords.longitude;
-          setLatitude(lat);
-          setLongitude(lng);
-          getWeatherLocation(lat, lng);
-        })
-        .catch(error => {
-          const publicIp = require("public-ip");
-          const providerList = require("../api/iplocation_providers.json");
-          const filterData = providerList
-            .filter(data => {
-              return data.is_free === true;
-            })
-            .map(data => {
-              return data.uri;
+      const publicIp = require("public-ip");
+      publicIp.v4().then(results => {
+        ipInfo(results)
+          .then(res => {
+            const latLng = res.loc.split(",");
+            const lat = latLng[0];
+            const lng = latLng[1];
+            setRegion(convertRegion(res.region));
+            setCity(res.city);
+            setLatitude(lat);
+            setLongitude(lng);
+            fetchWeather(lat, lng).then(results => {
+              setWeather(results);
+              setSpinner(false);
             });
-
-          publicIp.v4().then(results => {
-            iplocation(results, filterData)
+          })
+          .catch(err => {
+            console.error(err);
+            ipData(results)
               .then(res => {
                 const lat = res.latitude;
                 const lng = res.longitude;
+                setRegion(convertRegion(res.region));
+                setCity(res.city);
                 setLatitude(lat);
                 setLongitude(lng);
-                getWeatherLocation(lat, lng);
-                setSpinner(false);
+                fetchWeather(lat, lng).then(results => {
+                  setWeather(results);
+                  setSpinner(false);
+                });
               })
               .catch(err => {
-                console.error("IP Location Status:", err.message, "| Must type a city in search bar instead.");
+                console.error(err);
               });
           });
-          console.error("Geolocation Status:", error.message, "| Trying IP location search instead.");
-        });
+      });
     }
   }, []);
 

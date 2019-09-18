@@ -6,6 +6,7 @@ import "react-micro-modal/dist/index.css";
 import { useState } from "react";
 import { getDirection, getCondition, calculatePressure, formatAsPercentage, Moon } from "../../../../utils/calculateWeather";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const dailySlider = props => {
   const [swiper, updateSwiper] = useState(null);
@@ -267,10 +268,10 @@ const dailySlider = props => {
     <div className={styles.slider}>
       <div className={styles["slider-arrows"]}>
         <button onClick={goPrev}>
-          <i className="fas fa-chevron-left"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-left"]} />
         </button>
         <button onClick={goNext}>
-          <i className="fas fa-chevron-right"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-right"]} />
         </button>
       </div>
       {slider}

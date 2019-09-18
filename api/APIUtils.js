@@ -17,6 +17,18 @@ export function fetchLocation(latitude, longitude) {
     .catch(error => console.error(error));
 }
 
+export function ipInfo(ip) {
+  return fetch(`/api/ipinfo/${ip}`)
+    .then(response => response.json())
+    .catch(error => console.error(error));
+}
+
+export function ipData(ip) {
+  return fetch(`/api/ipdata/${ip}`)
+    .then(response => response.json())
+    .catch(error => console.error(error));
+}
+
 // Get weather from coordinates
 export function fetchWeather(latitude, longitude) {
   return (

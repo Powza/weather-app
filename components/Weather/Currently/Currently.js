@@ -90,7 +90,7 @@ const currently = props => {
                     closeOnAnimationEnd={true}
                     trigger={handleOpen => (
                       <a onClick={handleOpen} target="_blank" className={[["btn"], styles["stats-more"]].join(" ")}>
-                        More Details <i className="fas fa-long-arrow-alt-right" />
+                        More Details
                       </a>
                     )}
                     children={handleClose => (
@@ -104,7 +104,8 @@ const currently = props => {
                         <div className={styles["modal-body"]}>
                           <ul>
                             <li>
-                              <strong>Feels Like</strong> <span>{Math.round(props.currently.apparentTemperature)} °</span>
+                              <strong>Feels Like</strong>{" "}
+                              <span>{Math.round(props.currently.apparentTemperature)} °</span>
                             </li>
                             <li>
                               <strong>Dew Point</strong> <span>{Math.round(props.currently.dewPoint)} °</span>
@@ -116,7 +117,8 @@ const currently = props => {
                               <strong>Cloud Cover</strong> <span>{formatAsPercentage(props.currently.cloudCover)}</span>
                             </li>
                             <li>
-                              <strong>Air Pressure</strong> <span>{calculatePressure(props.currently.pressure)} in</span>
+                              <strong>Air Pressure</strong>{" "}
+                              <span>{calculatePressure(props.currently.pressure)} in</span>
                             </li>
                             <li>
                               <strong>Ozone</strong> <span>{Math.round(props.currently.ozone)} du</span>
@@ -129,8 +131,8 @@ const currently = props => {
                                 <li>
                                   <strong>Nearest Storm</strong>{" "}
                                   <span>
-                                    {getDirection(props.currently.nearestStormBearing)} {Math.round(props.currently.nearestStormDistance)}{" "}
-                                    mi
+                                    {getDirection(props.currently.nearestStormBearing)}{" "}
+                                    {Math.round(props.currently.nearestStormDistance)} mi
                                   </span>
                                 </li>
                               </>

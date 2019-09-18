@@ -5,6 +5,7 @@ import MicroModal from "react-micro-modal";
 import "react-micro-modal/dist/index.css";
 import { useState } from "react";
 import { getDirection, getCondition, calculatePressure, formatAsPercentage, Moon } from "../../../../utils/calculateWeather";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const hourlySlider = props => {
   const [swiper, updateSwiper] = useState(null);
@@ -187,10 +188,10 @@ const hourlySlider = props => {
     <div className={styles.slider}>
       <div className={styles["slider-arrows"]}>
         <button onClick={goPrev}>
-          <i className="fas fa-chevron-left"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-left"]} />
         </button>
         <button onClick={goNext}>
-          <i className="fas fa-chevron-right"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-right"]} />
         </button>
       </div>
       {slider}
