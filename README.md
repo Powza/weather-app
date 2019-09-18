@@ -28,9 +28,12 @@ What you can do:
 # Google Maps
 GOOGLE_MAPS_API_PLACES_KEY=YOUR_KEY_HERE
 
-# Font Awesome
-FONT_AWESOME_KIT_ID=YOUR_KEY_HERE
-
 # Dark Sky
 DARK_SKY_API_KEY=YOUR_KEY_HERE
+
+# https://ipinfo.io/
+IPINFO_API_KEY=YOUR_KEY_HERE
+
+# https://api.ipdata.co/
+IPDATA_API_KEY=YOUR_KEY_HERE
 ```
