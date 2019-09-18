@@ -4,7 +4,7 @@ import { geocodeByAddress } from "react-places-autocomplete";
 import { useStoreActions, useStoreState } from "easy-peasy";
 import Search from "../Search/Search";
 import { convertRegion } from "../../utils/stateNameAbbreviation";
-import { getPosition, fetchLocation, fetchWeather, ipInfo, ipData } from "../../api/APIUtils";
+import { getPosition, fetchLocation, fetchWeather } from "../../api/APIUtils";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -107,9 +107,11 @@ const header = props => {
 
   const refreshLocation = () => {
     setSpinner(true);
+    notify("Refreshing Weather Data");
     fetchWeather(latitude, longitude).then(results => {
       setWeather(results);
       setSpinner(false);
+      toast.dismiss(toastId);
     });
   };
 
@@ -135,12 +137,19 @@ const header = props => {
     fetchWeather(lat, lng).then(results => {
       setWeather(results);
       setSpinner(false);
+      toast.dismiss(toastId);
     });
   }
+
+  let toastId = null;
+
+  const notify = data => (toastId = toast.info(data, { autoClose: false }));
+  const update = data => toast.update(toastId, { render: data, type: toast.TYPE.SUCCESS, autoClose: 5000 });
 
   const useLocation = () => {
     setSpinner(true);
     setDropdownOpen(!dropdownOpen);
+    notify("Hang tight! We are finding your location.");
     getPosition()
       .then(results => {
         const lat = results.coords.latitude;
@@ -150,43 +159,8 @@ const header = props => {
         getWeatherLocation(lat, lng);
       })
       .catch(error => {
-        const publicIp = require("public-ip");
-        publicIp.v4().then(results => {
-          ipInfo(results)
-            .then(res => {
-              const latLng = res.loc.split(",");
-              const lat = latLng[0];
-              const lng = latLng[1];
-              setRegion(convertRegion(res.region));
-              setCity(res.city);
-              setLatitude(lat);
-              setLongitude(lng);
-              fetchWeather(lat, lng).then(results => {
-                setWeather(results);
-                setSpinner(false);
-              });
-            })
-            .catch(err => {
-              console.error(err);
-              ipData(results)
-                .then(res => {
-                  const lat = res.latitude;
-                  const lng = res.longitude;
-                  setRegion(convertRegion(res.region));
-                  setCity(res.city);
-                  setLatitude(lat);
-                  setLongitude(lng);
-                  fetchWeather(lat, lng).then(results => {
-                    setWeather(results);
-                    setSpinner(false);
-                  });
-                })
-                .catch(err => {
-                  console.error(err);
-                });
-            });
-        });
-        toast.info(error.message);
+        setSpinner(false);
+        toast.update(toastId, { render: `Error! ${error.message}`, type: toast.TYPE.ERROR, autoClose: 5000 });
       });
   };
 
