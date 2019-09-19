@@ -149,7 +149,7 @@ const header = props => {
   const useLocation = () => {
     setSpinner(true);
     setDropdownOpen(!dropdownOpen);
-    notify("Hang tight! We are finding your location.");
+    notify("Hang tight! Checking your location.");
     getPosition()
       .then(results => {
         const lat = results.coords.latitude;

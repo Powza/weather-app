@@ -61,11 +61,13 @@ const index = () => {
   }, []);
 
   return (
-    <Layout title="Weather App">
-      <Header />
-      <Weather />
-      <Footer />
-    </Layout>
+    <>
+      <Layout title="Weather App">
+        <Header />
+        <Weather />
+        <Footer />
+      </Layout>
+    </>
   );
 };
 
