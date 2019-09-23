@@ -3,18 +3,15 @@ import { action, createStore } from "easy-peasy";
 const weather = {
   weatherData: {},
   add: action((state, weatherData) => {
-    state.weatherData[weatherData.id] = weatherData;
+    state.weatherData[weatherData.time] = weatherData;
   })
 };
 
-test("add todo action", async () => {
-  // arrange
-  const weatherData = { id: 1, text: "foo" };
+test("Add Weather Data", async () => {
+  const weatherData = { time: 1509993277, summary: "Drizzle" };
   const store = createStore(weather);
 
-  // act
   store.getActions().add(weatherData);
 
-  // assert
-  expect(store.getState().weatherData).toEqual({ [weatherData.id]: weatherData });
+  expect(store.getState().weatherData).toEqual({ [weatherData.time]: weatherData });
 });
