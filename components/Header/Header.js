@@ -5,9 +5,10 @@ import { useStoreActions, useStoreState } from "easy-peasy";
 import Search from "../Search/Search";
 import { convertRegion } from "../../utils/stateNameAbbreviation";
 import { getPosition, fetchLocation, fetchWeather } from "../../api/APIUtils";
-import iplocation from "iplocation";
+import { toast } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { InputGroupButtonDropdown, Badge, DropdownToggle, DropdownMenu, DropdownItem, InputGroup } from "reactstrap";
+import { InputGroupButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, InputGroup } from "reactstrap";
 
 const header = props => {
   const [search, setSearch] = useState({
@@ -22,7 +23,7 @@ const header = props => {
   const setLatitude = useStoreActions(actions => actions.location.setLocationLatitude);
   const setLongitude = useStoreActions(actions => actions.location.setLocationLongitude);
   const setCity = useStoreActions(actions => actions.location.setLocationCity);
-  const setState = useStoreActions(actions => actions.location.setLocationState);
+  const setRegion = useStoreActions(actions => actions.location.setLocationRegion);
 
   const latitude = useStoreState(state => state.location.locationLatitude);
   const longitude = useStoreState(state => state.location.locationLongitude);
@@ -33,7 +34,7 @@ const header = props => {
     historyArray = localStorage.getItem("search-history") ? JSON.parse(localStorage.getItem("search-history")) : [];
     searchHistory = JSON.parse(localStorage.getItem("search-history"));
     if (searchHistory === undefined) {
-      const keys = ["city", "state"],
+      const keys = ["city", "region"],
         filtered = searchHistory.filter((s => o => (k => !s.has(k) && s.add(k))(keys.map(k => o[k]).join("|")))(new Set()));
       localStorage.setItem("search-history", JSON.stringify(filtered));
     }
@@ -56,7 +57,7 @@ const header = props => {
     let newHistory = [...searchHistory];
     setSpinner(true);
     setCity(newHistory[index].city);
-    setState(newHistory[index].state);
+    setRegion(newHistory[index].region);
     fetchWeather(newHistory[index].lat, newHistory[index].lng).then(results => {
       setWeather(results);
       setSpinner(false);
@@ -75,7 +76,7 @@ const header = props => {
         const lat = data.geometry.location.lat();
         const lng = data.geometry.location.lng();
         let city = null;
-        let state = null;
+        let region = null;
         setLatitude(lat);
         setLongitude(lng);
         setSearch({ address: "" });
@@ -87,12 +88,12 @@ const header = props => {
               city = addressObj.long_name;
             }
             if (addressObj.types[j] === "administrative_area_level_1") {
-              setState(addressObj.short_name);
-              state = addressObj.short_name;
+              setRegion(addressObj.short_name);
+              region = addressObj.short_name;
             }
           }
         }
-        historyArray.push({ city: city, state: state, lat: lat, lng: lng });
+        historyArray.push({ city: city, region: region, lat: lat, lng: lng });
         localStorage.setItem("search-history", JSON.stringify(historyArray));
         fetchWeather(lat, lng).then(results => {
           setWeather(results);
@@ -106,9 +107,11 @@ const header = props => {
 
   const refreshLocation = () => {
     setSpinner(true);
+    notify("Refreshing Weather Data");
     fetchWeather(latitude, longitude).then(results => {
       setWeather(results);
       setSpinner(false);
+      toast.dismiss(toastId);
     });
   };
 
@@ -117,9 +120,9 @@ const header = props => {
       const json = results.features[0].properties.address;
       if (json.state) {
         let stateAbbr = convertRegion(json.state);
-        setState(stateAbbr);
+        setRegion(stateAbbr);
       } else if (json.country) {
-        setState(json.country);
+        setRegion(json.country);
       }
       if (json.locality) {
         setCity(json.locality);
@@ -134,12 +137,19 @@ const header = props => {
     fetchWeather(lat, lng).then(results => {
       setWeather(results);
       setSpinner(false);
+      toast.dismiss(toastId);
     });
   }
+
+  let toastId = null;
+
+  const notify = data => (toastId = toast.info(data, { autoClose: false }));
+  const update = data => toast.update(toastId, { render: data, type: toast.TYPE.SUCCESS, autoClose: 5000 });
 
   const useLocation = () => {
     setSpinner(true);
     setDropdownOpen(!dropdownOpen);
+    notify("Hang tight! Checking your location.");
     getPosition()
       .then(results => {
         const lat = results.coords.latitude;
@@ -147,34 +157,10 @@ const header = props => {
         setLatitude(lat);
         setLongitude(lng);
         getWeatherLocation(lat, lng);
-        setSpinner(false);
       })
       .catch(error => {
-        const publicIp = require("public-ip");
-        const providerList = require("../../api/iplocation_providers.json");
-        const filterData = providerList
-          .filter(data => {
-            return data.is_free === true;
-          })
-          .map(data => {
-            return data.uri;
-          });
-
-        publicIp.v4().then(results => {
-          iplocation(results, filterData)
-            .then(res => {
-              const lat = res.latitude;
-              const lng = res.longitude;
-              setLatitude(lat);
-              setLongitude(lng);
-              getWeatherLocation(lat, lng);
-              setSpinner(false);
-            })
-            .catch(err => {
-              console.error("IP Location Status:", err.message, "| Must type a city in search bar instead.");
-            });
-        });
-        console.error("Geolocation Status:", error.message, "| Trying IP location search instead.");
+        setSpinner(false);
+        toast.update(toastId, { render: `Error! ${error.message}`, type: toast.TYPE.ERROR, autoClose: 5000 });
       });
   };
 
@@ -190,19 +176,19 @@ const header = props => {
                     <Search address={search.address} changed={handleSearchChange} selected={handleSearchSelect} />
                     <InputGroupButtonDropdown addonType="append" isOpen={dropdownOpen} toggle={toggleDropdown}>
                       <DropdownToggle className={styles["btn-more"]}>
-                        <i className="fas fa-ellipsis-v"></i>
+                        <FontAwesomeIcon icon={["fas", "ellipsis-v"]} />
                       </DropdownToggle>
                       <DropdownMenu right className={styles["dropdown-custom"]}>
                         <DropdownItem onClick={refreshLocation}>
                           Refresh Weather
                           <span className={styles["btn-right"]}>
-                            <i className="fas fa-sync"></i>
+                            <FontAwesomeIcon icon={["fas", "sync"]} />
                           </span>
                         </DropdownItem>
                         <DropdownItem onClick={useLocation}>
                           Use My Location
                           <span className={styles["btn-right"]}>
-                            <i className="fas fa-location-arrow"></i>
+                            <FontAwesomeIcon icon={["fas", "location-arrow"]} />
                           </span>
                         </DropdownItem>
                         {searchHistory != null && (
@@ -217,7 +203,7 @@ const header = props => {
                                       useSpecificHistory(index);
                                     }}
                                   >
-                                    {item.city}, {item.state}
+                                    {item.city}, {item.region}
                                   </span>
 
                                   <span
@@ -226,7 +212,7 @@ const header = props => {
                                       deleteSpecificHistory(index);
                                     }}
                                   >
-                                    <i className="fas fa-minus-circle"></i>
+                                    <FontAwesomeIcon icon={["fas", "minus-circle"]} />
                                   </span>
                                 </DropdownItem>
                               );

@@ -4,9 +4,9 @@ import Swiper from "react-id-swiper";
 import MicroModal from "react-micro-modal";
 import "react-micro-modal/dist/index.css";
 import { useState } from "react";
-import { getDirection, getCondition, calculatePressure, formatAsPercentage } from "../../../../utils/calculateWeather";
-import Moon from "../../../../utils/getMoonPhase";
+import { getDirection, getCondition, calculatePressure, formatAsPercentage, Moon } from "../../../../utils/calculateWeather";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const dailySlider = props => {
   const [swiper, updateSwiper] = useState(null);
@@ -37,7 +37,7 @@ const dailySlider = props => {
 
   sliderInitialize = props.weather.daily.data.slice(0, 8).map((item, index) => {
     const backgroundCondition = {
-      backgroundImage: `url(/static/weatherBackgrounds/${item.icon}.jpg)`
+      backgroundImage: `url(/weatherBackgrounds/${item.icon}.jpg)`
     };
     return (
       <div key={item.time} className={styles.slide}>
@@ -133,8 +133,7 @@ const dailySlider = props => {
                       <li>
                         <strong>Temperature</strong>{" "}
                         <span>
-                          Min {Math.round(item.apparentTemperatureMin)} ° / Max{" "}
-                          {Math.round(item.apparentTemperatureMax)} °
+                          Min {Math.round(item.apparentTemperatureMin)} ° / Max {Math.round(item.apparentTemperatureMax)} °
                         </span>
                       </li>
                       <li>
@@ -203,15 +202,11 @@ const dailySlider = props => {
                               </thead>
                               <tbody>
                                 {checkHour.map((hour, index) => {
-                                  if (
-                                    moment.unix(hour.time).format("MMMM Do YYYY") ===
-                                    moment.unix(item.time).format("MMMM Do YYYY")
-                                  ) {
+                                  if (moment.unix(hour.time).format("MMMM Do YYYY") === moment.unix(item.time).format("MMMM Do YYYY")) {
                                     return (
                                       <tr key={hour.time}>
                                         <th scope="row">
-                                          {moment.unix(hour.time).format("h a")}{" "}
-                                          <WeatherIcon condition={hour.icon} color="black" />
+                                          {moment.unix(hour.time).format("h a")} <WeatherIcon condition={hour.icon} color="black" />
                                         </th>
                                         <td>{Math.round(hour.apparentTemperature)} °</td>
                                         <td>{formatAsPercentage(hour.precipProbability)}</td>
@@ -248,17 +243,20 @@ const dailySlider = props => {
     spaceBetween: 5,
     shouldSwiperUpdate: true,
     breakpoints: {
-      1024: {
-        slidesPerView: 4
-      },
-      768: {
-        slidesPerView: 3
+      320: {
+        slidesPerView: 2
       },
       640: {
         slidesPerView: 3
       },
-      320: {
-        slidesPerView: 2
+      768: {
+        slidesPerView: 3
+      },
+      1024: {
+        slidesPerView: 5
+      },
+      1400: {
+        slidesPerView: 7
       }
     }
   };
@@ -273,10 +271,10 @@ const dailySlider = props => {
     <div className={styles.slider}>
       <div className={styles["slider-arrows"]}>
         <button onClick={goPrev}>
-          <i className="fas fa-chevron-left"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-left"]} />
         </button>
         <button onClick={goNext}>
-          <i className="fas fa-chevron-right"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-right"]} />
         </button>
       </div>
       {slider}

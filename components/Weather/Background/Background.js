@@ -4,7 +4,7 @@ const weatherBackground = props => {
   let image = null;
   if (props.condition) {
     const divStyle = {
-      backgroundImage: `url('/static/weatherBackgrounds/${props.condition}.jpg')`
+      backgroundImage: `url('/weatherBackgrounds/${props.condition}.jpg')`
     };
     image = <div className={styles["background"]} style={divStyle} />;
   }

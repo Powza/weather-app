@@ -1,4 +1,5 @@
 import styles from "./Footer.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const footer = props => {
   return (
@@ -8,9 +9,9 @@ const footer = props => {
         <br />
         View Source on{" "}
         <a href="https://github.com/Powza/weather-app">
-          <i className="fab fa-github" /> GitHub
+          <FontAwesomeIcon icon={["fab", "github"]} /> GitHub
         </a>{" "}
-        - Weather Data by <a href="https://darksky.net/dev">Dark Sky</a>
+        - Powered by <a href="https://darksky.net/poweredby/">Dark Sky</a>
       </div>
     </footer>
   );

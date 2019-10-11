@@ -4,8 +4,8 @@ import Swiper from "react-id-swiper";
 import MicroModal from "react-micro-modal";
 import "react-micro-modal/dist/index.css";
 import { useState } from "react";
-import { getDirection, getCondition, calculatePressure, formatAsPercentage } from "../../../../utils/calculateWeather";
-import Moon from "../../../../utils/getMoonPhase";
+import { getDirection, getCondition, calculatePressure, formatAsPercentage, Moon } from "../../../../utils/calculateWeather";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const hourlySlider = props => {
   const [swiper, updateSwiper] = useState(null);
@@ -29,7 +29,7 @@ const hourlySlider = props => {
 
   sliderInitialize = props.weather.hourly.data.slice(0, 48).map((item, index) => {
     const backgroundCondition = {
-      backgroundImage: `url(/static/weatherBackgrounds/${item.icon}.jpg)`
+      backgroundImage: `url(/weatherBackgrounds/${item.icon}.jpg)`
     };
     return (
       <div key={item.time} className={styles.slide}>
@@ -163,17 +163,20 @@ const hourlySlider = props => {
     spaceBetween: 5,
     shouldSwiperUpdate: true,
     breakpoints: {
-      1024: {
-        slidesPerView: 4
-      },
-      768: {
-        slidesPerView: 3
+      320: {
+        slidesPerView: 2
       },
       640: {
         slidesPerView: 3
       },
-      320: {
-        slidesPerView: 1
+      768: {
+        slidesPerView: 3
+      },
+      1024: {
+        slidesPerView: 5
+      },
+      1400: {
+        slidesPerView: 7
       }
     }
   };
@@ -188,10 +191,10 @@ const hourlySlider = props => {
     <div className={styles.slider}>
       <div className={styles["slider-arrows"]}>
         <button onClick={goPrev}>
-          <i className="fas fa-chevron-left"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-left"]} />
         </button>
         <button onClick={goNext}>
-          <i className="fas fa-chevron-right"></i>
+          <FontAwesomeIcon icon={["fas", "chevron-right"]} />
         </button>
       </div>
       {slider}
