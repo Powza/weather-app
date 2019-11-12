@@ -29,7 +29,10 @@ const weather = props => {
               alerts={weather.alerts}
               flags={weather.flags}
             />
-            <Tabs className={styles.tabs} selectedTabClassName={styles.selected}>
+            <Tabs
+              className={styles.tabs}
+              selectedTabClassName={styles.selected}
+            >
               <TabList className="list-group list-group-horizontal">
                 <Tab className="list-group-item">Daily</Tab>
                 <Tab className="list-group-item">Hourly</Tab>
