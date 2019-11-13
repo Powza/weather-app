@@ -69,8 +69,8 @@ const dailySlider = props => {
               )}
               <WeatherIcon condition={item.icon} color="white" />
               <div className={styles.temp}>
-                {Math.round(item.apparentTemperatureMax)} °{" "}
-                <span>{Math.round(item.apparentTemperatureMin)} °</span>
+                {Math.round(item.temperatureHigh)} °{" "}
+                <span>{Math.round(item.temperatureLow)} °</span>
               </div>
               <span>{getCondition(item.icon)}</span>
             </div>
@@ -181,6 +181,13 @@ const dailySlider = props => {
                     <ul>
                       <li>
                         <strong>Temperature</strong>{" "}
+                        <span>
+                          Min {Math.round(item.temperatureLow)} ° / Max{" "}
+                          {Math.round(item.temperatureHigh)} °
+                        </span>
+                      </li>
+                      <li>
+                        <strong>Feels Like</strong>{" "}
                         <span>
                           Min {Math.round(item.apparentTemperatureMin)} ° / Max{" "}
                           {Math.round(item.apparentTemperatureMax)} °

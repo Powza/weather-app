@@ -164,6 +164,10 @@ const hourlySlider = props => {
                       <span>{Math.round(item.temperature)} °</span>
                     </li>
                     <li>
+                      <strong>Feels Like</strong>{" "}
+                      <span>{Math.round(item.apparentTemperature)} °</span>
+                    </li>
+                    <li>
                       <strong>Moon Phase</strong>{" "}
                       <span>
                         {
