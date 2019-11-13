@@ -286,8 +286,7 @@ const dailySlider = props => {
                                           />
                                         </th>
                                         <td>
-                                          {Math.round(hour.apparentTemperature)}{" "}
-                                          °
+                                          {Math.round(hour.temperature)} °
                                         </td>
                                         <td>
                                           {formatAsPercentage(
