@@ -38,7 +38,7 @@ const weatherIcon = props => {
       icon = <img src={`/weather/icons/${props.color}/svg/tstorms.svg`} alt={props.condition} />;
       break;
     case "tornado":
-      icon = <img src={`/weather/icons/${props.color}/svg/unknown.svg`} alt={props.condition} />;
+      icon = <img src={`/weather/icons/${props.color}/svg/tornado.svg`} alt={props.condition} />;
       break;
     default:
       icon = <img src={`/weather/icons/${props.color}/svg/unknown.svg`} alt={props.condition} />;
