@@ -1,7 +1,7 @@
-import App from "next/app";
-import React from "react";
-import withReduxStore from "../lib/with-redux-store";
-import { StoreProvider } from "easy-peasy";
+import App from 'next/app';
+import React from 'react';
+import withReduxStore from '../lib/with-redux-store';
+import { StoreProvider } from 'easy-peasy';
 
 class WeatherApp extends App {
   render() {
