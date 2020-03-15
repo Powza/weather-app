@@ -1,4 +1,4 @@
-import styles from "./Background.scss";
+import styles from "./Background.module.scss";
 
 const weatherBackground = props => {
   let image = null;

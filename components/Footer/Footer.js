@@ -1,5 +1,4 @@
-import styles from "./Footer.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import styles from "./Footer.module.scss";
 
 const footer = props => {
   return (
@@ -7,11 +6,8 @@ const footer = props => {
       <div className="container-fluid">
         Weather App by <a href="https://tinyminute.com/">Tiny Minute</a>
         <br />
-        View Source on{" "}
-        <a href="https://github.com/Powza/weather-app">
-          <FontAwesomeIcon icon={["fab", "github"]} /> GitHub
-        </a>{" "}
-        - Powered by <a href="https://darksky.net/poweredby/">Dark Sky</a>
+        View Source on <a href="https://github.com/Powza/weather-app"> GitHub</a> - Powered by{" "}
+        <a href="https://darksky.net/poweredby/">Dark Sky</a>
       </div>
     </footer>
   );

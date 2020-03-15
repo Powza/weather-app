@@ -27,18 +27,27 @@
   width: 40px;
   color: rgba(#fff, 1);
   background: rgba(#fff, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   &:hover {
     color: #fff;
     background: rgba(#fff, 0.3);
   }
+  svg {
+    fill: #fff;
+    height: 16px;
+    width: 16px;
+  }
 }
 
 .btn-remove {
-  color: red;
+  svg {
+    fill: red;
+  }
 }
 .btn-right {
-  margin-left: 10px;
-  float: right;
+  margin-left: auto;
 }
 .btn-last {
   text-align: center;
@@ -51,9 +60,17 @@
   right: 0 !important;
   transform: none !important;
   button {
+    display: flex;
+    align-items: center;
+    background: none;
     &:hover {
       background: #eee;
       color: #000;
     }
+  }
+  svg {
+    height: 14px;
+    width: 14px;
+    display: flex;
   }
 }

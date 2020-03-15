@@ -1,6 +1,4 @@
 const webpack = require("webpack");
-const withSass = require("@zeit/next-sass");
-const withCss = require("@zeit/next-css");
 const withTM = require("next-transpile-modules");
 const withPlugins = require("next-compose-plugins");
 
@@ -28,22 +26,6 @@ module.exports = withPlugins(
       withTM,
       {
         transpileModules: ["swiper", "dom7", "public-ip", "ip-regex", "is-ip"]
-      }
-    ],
-    [
-      withSass,
-      {
-        cssModules: true,
-        cssLoaderOptions: {
-          importLoaders: 1,
-          localIdentName: "[name]__[local]__[hash:base64:5]"
-        }
-      }
-    ],
-    [
-      withCss,
-      {
-        cssModules: false
       }
     ]
   ],

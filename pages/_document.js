@@ -24,8 +24,11 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#ffffff" />
           <meta name="msapplication-config" content="/favicon/browserconfig.xml" />
           <meta name="theme-color" content="#ffffff"></meta>
-          <link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" />
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.0/css/swiper.min.css" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap"
+            rel="stylesheet"
+          />
+          <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css" />
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
           <script
             dangerouslySetInnerHTML={{

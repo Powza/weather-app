@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useIsMount } from "../../utils/useIsMount";
 import { useStoreState } from "easy-peasy";
 import PlacesAutocomplete from "react-places-autocomplete";
-import styles from "./Search.scss";
+import styles from "./Search.module.scss";
 
 const search = props => {
   const coords = useStoreState(state => state.location.locationLatitude);
@@ -36,8 +36,7 @@ const search = props => {
       onChange={props.changed}
       onSelect={props.selected}
       searchOptions={searchOptions}
-      googleCallbackName="myCallbackFunc"
-    >
+      googleCallbackName="myCallbackFunc">
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => {
         const { onChange } = getInputProps({
           placeholder: `${city}, ${state}`
@@ -61,12 +60,14 @@ const search = props => {
               placeholder={`${readyStatus}`}
               value={props.address}
               onChange={onChange}
-              className={[["form-control"], ["location-search-input"], styles["form-control"]].join(" ")}
+              className={[["form-control"], ["location-search-input"], styles["form-control"]].join(
+                " "
+              )}
             />
             <div className={[["list-group"], styles["list-group"]].join(" ")}>
               {loading && (
                 <div className="list-group-item disabled" aria-disabled="true">
-                  <i className="fas fa-spinner fa-pulse" /> Loading Results...
+                  Loading Results...
                 </div>
               )}
               {suggestions.map(suggestion => {
@@ -77,8 +78,7 @@ const search = props => {
                   <div
                     {...getSuggestionItemProps(suggestion, {
                       className
-                    })}
-                  >
+                    })}>
                     {suggestion.description}
                   </div>
                 );

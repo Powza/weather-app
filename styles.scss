@@ -7,18 +7,8 @@ body {
   font-family: "Lato", sans-serif;
   color: #fff;
   background: #222;
-  font-family: "Lato", sans-serif;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
   -webkit-text-size-adjust: 100%;
-  -webkit-animation-name: initial;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
   flex-direction: column;
 }
 
@@ -77,14 +67,14 @@ body {
   width: 150px;
   height: 150px;
   margin: 0px auto;
-  -webkit-animation: rotation .6s infinite linear;
-  -moz-animation: rotation .6s infinite linear;
-  -o-animation: rotation .6s infinite linear;
-  animation: rotation .6s infinite linear;
-  border-left: 6px solid rgba(255, 255, 255, .15);
-  border-right: 6px solid rgba(255, 255, 255, .15);
-  border-bottom: 6px solid rgba(255, 255, 255, .15);
-  border-top: 6px solid rgba(255, 255, 255, .8);
+  -webkit-animation: rotation 0.6s infinite linear;
+  -moz-animation: rotation 0.6s infinite linear;
+  -o-animation: rotation 0.6s infinite linear;
+  animation: rotation 0.6s infinite linear;
+  border-left: 6px solid rgba(255, 255, 255, 0.15);
+  border-right: 6px solid rgba(255, 255, 255, 0.15);
+  border-bottom: 6px solid rgba(255, 255, 255, 0.15);
+  border-top: 6px solid rgba(255, 255, 255, 0.8);
   border-radius: 100%;
 }
 
@@ -213,4 +203,127 @@ body {
       }
     }
   }
+}
+
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-slide-in {
+  from {
+    transform: translateY(15%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes modal-slide-out {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10%);
+  }
+}
+
+@keyframes modal-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.modal-slide[aria-hidden="false"] .modal-overlay {
+  animation: modal-fade-in 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal-slide[aria-hidden="true"] .modal-overlay {
+  animation: modal-fade-out 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal-slide[aria-hidden="false"] .modal-container {
+  animation: modal-slide-in 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal-slide[aria-hidden="true"] .modal-container {
+  animation: modal-slide-out 0.3s cubic-bezier(0, 0, 0.2, 1);
+}
+
+.modal {
+  color: #000;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+.modal .modal-container {
+  border-radius: 0 !important;
+  padding: 0 !important;
+  max-width: 600px !important;
+  width: 100%;
+  position: relative;
+  overflow: visible;
+}
+@media (max-width: 767px) {
+  .modal .modal-container {
+    height: 100%;
+    max-width: 100% !important;
+  }
+}
+.modal .table tr {
+  border-bottom: 1px dashed rgba(0, 0, 0, 0.2);
+}
+.modal .table th,
+.modal .table td {
+  padding: 5px 0;
+  text-align: right;
+  position: relative;
+}
+.modal .table th img,
+.modal .table td img {
+  float: right;
+  position: relative;
+  top: 2px;
+  margin-top: -6px;
+  height: 30px;
+}
+.modal .table thead tr th:first-child,
+.modal .table tbody tr th:first-child {
+  text-align: left;
+}
+.modal .react-tabs {
+  transition: 0.2s;
+}
+.modal .react-tabs .tab-group {
+  margin-bottom: 10px;
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+.modal .react-tabs .tab-group li {
+  border: 0;
+  outline: none;
+  padding: 3px 10px;
+  font-weight: 700;
+  display: inline-block;
+  margin: 0 10px;
+  border-bottom: 2px solid transparent;
+  color: #999;
+  background: none;
+  cursor: pointer;
+}
+.modal .react-tabs .tab-group li:hover {
+  color: #333;
+}
+.modal .react-tabs .tab-group li.react-tabs__tab--selected {
+  border-color: #000;
+  color: #000;
 }
