@@ -23,6 +23,7 @@
     padding: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
     &:first-of-type {
       margin-right: 5px;
     }
@@ -30,6 +31,7 @@
       background: rgba(#fff, 0.3);
     }
     svg {
+      display: block;
       fill: #fff;
       height: 15px;
       width: 15px;
