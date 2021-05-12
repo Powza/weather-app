@@ -45,7 +45,7 @@
     "react-toastify": "^5.5.0",
     "reactstrap": "^8.4.1",
     "sass": "^1.26.3",
-    "swiper": "^5.3.6",
+    "swiper": "^6.5.1",
     "typescript": "^3.8.3"
   },
   "devDependencies": {
