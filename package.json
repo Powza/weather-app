@@ -34,7 +34,7 @@
     "next": "^9.3.4",
     "next-compose-plugins": "^2.2.0",
     "next-transpile-modules": "^3.2.0",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "public-ip": "^4.0.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
